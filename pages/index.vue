@@ -1,3 +1,9 @@
+<script setup>
+// Estas importações são obrigatórias para o menu e rodapé funcionarem
+import Header from "~/layouts/Header.vue";
+import Footer from "~/layouts/Footer.vue";
+</script>
+
 <template>
   <div>
     <CommonScrollTop />

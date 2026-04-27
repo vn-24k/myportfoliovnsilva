@@ -51,9 +51,65 @@ onMounted(() => {
               <ul>
                 <li><i class="ri-circle-fill status-icon"></i>Available for Freelancing</li>
               </ul>
+<script setup>
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  // Configuração do Carrossel Infinito com verificação de segurança
+  const scroller = document.querySelector(".certifications-scroller");
+  if (scroller) {
+    const scrollerInner = scroller.querySelector(".scroller__inner");
+    const scrollerContent = Array.from(scrollerInner.children);
+
+    // Clona os itens para criar o efeito infinito
+    scrollerContent.forEach((item) => {
+      const duplicatedItem = item.cloneNode(true);
+      duplicatedItem.setAttribute("aria-hidden", true);
+      scrollerInner.appendChild(duplicatedItem);
+    });
+  }
+});
+</script>
+
+<template>
+  <section id="about" class="about-area">
+    <div class="container">
+      <div class="row">
+        
+        <div class="col-lg-4">
+          <div class="about-image-part wow fadeInUp delay-0-3s">
+            <img src="~/assets/images/about/profile.png" alt="About Me" class="profile-img" />
+            
+            <h2 class="display-name">Vinícius Silva</h2>
+            
+            <p>Backend & DevOps Specialist</p>
+            <div class="about-social text-center">
+              <ul>
+                <li><a href="https://linkedin.com/in/viniciussilva" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
+                <li><a href="https://github.com/vn-24k" target="_blank"><i class="ri-github-line"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-8">
+          <div class="about-content-part wow fadeInUp delay-0-2s">
+            <p class="hello-text">Hello There!</p>
+            <h2 class="hero-description">
+              I'm <span class="highlight-name">Vinícius Silva</span>, an AI & Backend Specialist crafting intelligent systems through neural networks and automated infrastructure.
+            </h2>
+            <div class="adress-field">
+              <ul>
+                <li><i class="ri-circle-fill status-icon"></i>Available for Freelancing</li>
+              </ul>
             </div>
             <div class="hero-btns">
-              <a href="/Vinicius_Caetano_CV.pdf" download="Vinicius_Caetano_CV.pdf" class="theme-btn download-btn">
+              <a 
+                href="/Vinicius_Caetano_CV.pdf" 
+                download="Vinicius_Caetano_CV.pdf" 
+                class="theme-btn download-btn"
+                @click.stop
+              >
                 Download CV <i class="ri-download-line"></i>
               </a>
             </div>
@@ -81,7 +137,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* 1. FONTES E ESTILOS DO TEXTO */
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
 
 .display-name {
@@ -107,9 +162,9 @@ onMounted(() => {
 }
 
 .status-icon { color: #3ecf8e; margin-right: 10px; }
-.download-btn { background-color: #e36049; border: none; cursor: pointer; display: inline-block; }
+/* Estilo do botão para garantir que funcione como link puro */
+.download-btn { background-color: #e36049; border: none; cursor: pointer; display: inline-block; color: white !important; }
 
-/* 2. ESTILOS DO CARROSSEL DE CERTIFICADOS (PROFISSIONAL) */
 .about-content-part-bottom {
   margin-top: 60px;
   border-top: 1px solid #2d3436;

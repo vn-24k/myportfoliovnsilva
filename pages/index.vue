@@ -53,3 +53,22 @@ h5 { color: #fff; font-size: 15px; margin: 0; font-weight: 600; }
 .glow-lightblue:hover { border-color: #38bdf8; box-shadow: 0 0 13px #38bdf8; }
 .glow-brightgreen:hover { border-color: #3ecf8e; box-shadow: 0 0 13px #3ecf8e; }
 </style>
+<script setup>
+import Header from "~/layouts/Header.vue";
+import Footer from "~/layouts/Footer.vue";
+import MetricsPanel from "~/components/home/MetricsPanel.vue"; // Adicione esta linha
+</script>
+
+<template>
+  <div>
+    <CommonScrollTop />
+    <Header />
+    <HomeAboutArea />
+    
+    <MetricsPanel />
+    
+    <HomePortfolioArea />
+    <HomeCtaArea />
+    <Footer />
+  </div>
+</template>

@@ -63,12 +63,12 @@ onMounted(() => {
             <div class="company-list">
               <div class="scroller" data-direction="left" data-speed="slow">
                 <div class="scroller__inner">
-                  <img src="/certificados/cert1.png" alt="Cert 1" />
-                  <img src="/certificados/cert2.png" alt="Cert 2" />
-                  <img src="/certificados/cert3.png" alt="Cert 3" />
-                  <img src="/certificados/cert4.png" alt="Cert 4" />
-                  <img src="/certificados/cert5.png" alt="Cert 5" />
-                  <img src="/certificados/cert6.png" alt="Cert 6" />
+                  <img src="/IMG-20260422-WA0005(2).jpg" alt="Cert 1" />
+                  <img src="/IMG-20260422-WA0006(1).jpg" alt="Cert 2" />
+                  <img src="/IMG-20260422-WA0007(1).jpg" alt="Cert 3" />
+                  <img src="/IMG-20260422-WA0008(1).jpg" alt="Cert 4" />
+                  <img src="/IMG-20260422-WA0009(1).jpg" alt="Cert 5" />
+                  <img src="/IMG-20260427-WA0001.jpg" alt="Cert 6" />
                 </div>
               </div>
             </div>
@@ -78,3 +78,14 @@ onMounted(() => {
     </div>
   </section>
 </template>
+
+<style scoped>
+/* Ajuste para as imagens do carrossel ficarem uniformes */
+.scroller__inner img {
+  height: 80px; 
+  width: auto;
+  margin: 0 20px;
+  object-fit: contain;
+}
+</style>
+ 

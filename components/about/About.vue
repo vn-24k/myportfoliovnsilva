@@ -9,7 +9,7 @@
         </div>
         <div class="col-lg-8">
           <div class="about-content-part wow fadeInUp delay-0-2s">
-            <h2>Olá, eu sou Vinícius Silva , Engenheiro de Software.</h2>
+            <h2> Vinícius Silva | Engenheiro de Software.</h2>
             <p>
               Especialista em IA & Automação com foco em arquitetura avançada de sistemas multi-agentes (LLMs) e Python. 
               Transformo infraestruturas complexas em ecossistemas autônomos e escaláveis.

@@ -42,7 +42,7 @@ onMounted(() => {
         <div class="col-lg-8">
           <div class="about-content-part wow fadeInUp delay-0-2s">
             <p>Hello There!</p>
-            <h2>I'm Vinícius Silva, an AI & Backend Specialist crafting intelligent systems.</h2>
+            <h2>I'm Vinícius Silva,an AI & Backend Specialist crafting intelligent systems.</h2>
             <div class="adress-field">
               <ul>
                 <li><i class="ri-circle-fill"></i>Available for Freelancing</li>

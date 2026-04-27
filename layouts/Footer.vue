@@ -7,14 +7,14 @@
           <div class="col-lg-6">
             <div class="copyright-text">
               <p>
-                Copyright @ {{ new Date().getFullYear() }}, <NuxtLink to="/">Bentos</NuxtLink> All Rights
+                Copyright @ {{ new Date().getFullYear() }}, <NuxtLink to="/">Vinícius Silva</NuxtLink> All Rights
                 Reserved.
               </p>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="copyright-text extra-copyright">
-              <p>Crafted with ❤️ <a href="https://github.com/jamilrayhan10" target="_blank">rk theme</a></p>
+              <p>Crafted with ❤️ <a href="https://github.com/vn-24k"target="_blank">rk theme</a></p>
             </div>
           </div>
         </div>

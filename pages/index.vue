@@ -34,7 +34,7 @@
   border: 2px solid #2d3436; transition: 0.3s; height: 100%;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
-.skill-icon img { max-width: 50px; margin-bottom: 15px; }
+.skill-icon img { max-width: 65px; margin-bottom: 15px; }
 h5 { color: #fff; font-size: 15px; margin: 0; font-weight: 600; }
 .glow-yellow:hover { border-color: #ffdf5e; box-shadow: 0 0 15px #ffdf5e; }
 .glow-orange:hover { border-color: #ff9900; box-shadow: 0 0 15px #ff9900; }

@@ -2,22 +2,17 @@
 import { onMounted } from 'vue';
 
 onMounted(() => {
-  const scrollers = document.querySelectorAll(".scroller");
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    addAnimation(scrollers);
-  }
-  function addAnimation(scrollers) {
-    scrollers.forEach((scroller) => {
-      scroller.setAttribute("data-animated", true);
-      const scrollerInner = scroller.querySelector(".scroller__inner");
-      const scrollerContent = Array.from(scrollerInner.children);
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        duplicatedItem.setAttribute("aria-hidden", true);
-        scrollerInner.appendChild(duplicatedItem);
-      });
-    });
-  }
+  // Configuração do Carrossel Infinito
+  const scroller = document.querySelector(".certifications-scroller");
+  const scrollerInner = scroller.querySelector(".scroller__inner");
+  const scrollerContent = Array.from(scrollerInner.children);
+
+  // Clona os itens para criar o efeito infinito
+  scrollerContent.forEach((item) => {
+    const duplicatedItem = item.cloneNode(true);
+    duplicatedItem.setAttribute("aria-hidden", true);
+    scrollerInner.appendChild(duplicatedItem);
+  });
 });
 </script>
 
@@ -25,46 +20,53 @@ onMounted(() => {
   <section id="about" class="about-area">
     <div class="container">
       <div class="row">
+        
         <div class="col-lg-4">
           <div class="about-image-part wow fadeInUp delay-0-3s">
-            <img src="~/assets/images/about/profile.png" alt="About Me" />
-            <h2>Vinícius Silva</h2>
+            <img src="~/assets/images/about/profile.png" alt="About Me" class="profile-img" />
+            
+            <h2 class="display-name">Vinícius Silva</h2>
+            
             <p>Backend & DevOps Specialist</p>
             <div class="about-social text-center">
               <ul>
+                <li><a href="https://linkedin.com/in/viniciussilva" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
                 <li><a href="https://github.com/vn-24k" target="_blank"><i class="ri-github-line"></i></a></li>
-                <li><a href="https://linkedin.com" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
               </ul>
             </div>
           </div>
         </div>
-
+        
         <div class="col-lg-8">
           <div class="about-content-part wow fadeInUp delay-0-2s">
-            <p>Hello There!</p>
-            <h2>I'm Vinícius Silva,an AI & Backend Specialist crafting intelligent systems.</h2>
+            <p class="hello-text">Hello There!</p>
+            <h2 class="hero-description">
+              I'm <span class="highlight-name">Vinícius Silva</span>, an AI & Backend Specialist crafting intelligent systems through neural networks and automated infrastructure.
+            </h2>
             <div class="adress-field">
               <ul>
-                <li><i class="ri-circle-fill"></i>Available for Freelancing</li>
-                <li><i class="ri-circle-fill"></i>Expertise: Neural Networks, Data Science & DevOps</li>
+                <li><i class="ri-circle-fill status-icon"></i>Available for Freelancing</li>
               </ul>
+            </div>
+            <div class="hero-btns">
+              <NuxtLink to="/contact" class="theme-btn download-btn">Download CV <i class="ri-download-line"></i></NuxtLink>
             </div>
           </div>
 
           <div class="about-content-part-bottom wow fadeInUp delay-0-2s">
-            <h2 style="margin-bottom: 30px;">My Certifications & Training</h2>
-            <div class="company-list">
-              <div class="scroller" data-direction="left" data-speed="slow">
-                <div class="scroller__inner">
-                  <img src="/certificados/cert1.png" alt="Cert 1" />
-                  <img src="/certificados/cert2.png" alt="Cert 2" />
-                  <img src="/certificados/cert3.png" alt="Cert 3" />
-                  <img src="/certificados/cert4.png" alt="Cert 4" />
-                  <img src="/certificados/cert5.png" alt="Cert 5" />
-                  <img src="/certificados/cert6.png" alt="Cert 6" />
-                </div>
+            <h2 class="section-title">My Certifications & Training</h2>
+            
+            <div class="certifications-scroller" data-speed="slow">
+              <div class="scroller__inner">
+                <div class="cert-item"><img src="/IMG-20260422-WA0005(2).jpg" alt="Cert 1" /></div>
+                <div class="cert-item"><img src="/IMG-20260422-WA0006(1).jpg" alt="Cert 2" /></div>
+                <div class="cert-item"><img src="/IMG-20260422-WA0007(1).jpg" alt="Cert 3" /></div>
+                <div class="cert-item"><img src="/IMG-20260422-WA0008(1).jpg" alt="Cert 4" /></div>
+                <div class="cert-item"><img src="/IMG-20260422-WA0009(1).jpg" alt="Cert 5" /></div>
+                <div class="cert-item"><img src="/IMG-20260427-WA0001.jpg" alt="Cert 6" /></div>
               </div>
             </div>
+            
           </div>
         </div>
       </div>
@@ -73,23 +75,100 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.scroller[data-animated="true"] {
-  overflow: hidden;
-  -webkit-mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
-  mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+/* 1. FONTES E ESTILOS DO TEXTO */
+/* Importa uma fonte moderna e robusta para o nome */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
+
+.display-name {
+  font-family: 'Syne', sans-serif; /* Nova fonte aplicada aqui */
+  font-weight: 800;
+  font-size: 36px;
+  color: #fff;
+  margin-top: 20px;
+  letter-spacing: -1px;
 }
+
+.highlight-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hero-description {
+  font-size: 28px;
+  line-height: 1.4;
+  color: #a0a0a0;
+  font-weight: 400;
+}
+
+.status-icon { color: #3ecf8e; margin-right: 10px; }
+.download-btn { background-color: #e36049; border: none; }
+
+/* 2. ESTILOS DO CARROSSEL DE CERTIFICADOS (PROFISSIONAL) */
+.about-content-part-bottom {
+  margin-top: 60px;
+  border-top: 1px solid #2d3436;
+  padding-top: 40px;
+}
+
+.section-title {
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* Container principal do scroller */
+.certifications-scroller {
+  max-width: 100%;
+  overflow: hidden;
+  /* Máscara de gradiente para suavizar as bordas (efeito premium) */
+  -webkit-mask: linear-gradient(90deg, transparent, white 15%, white 85%, transparent);
+  mask: linear-gradient(90deg, transparent, white 15%, white 85%, transparent);
+}
+
+/* Container interno que segura os itens */
 .scroller__inner {
   display: flex;
-  gap: 2rem;
+  gap: 20px;
+  padding: 10px 0;
   width: max-content;
-  animation: scroll 30s linear infinite;
+  flex-wrap: nowrap;
+  animation: scroll var(--_animation-duration, 40s) var(--_animation-direction, forwards) linear infinite;
 }
-.scroller__inner img {
-  height: 50px;
-  width: auto;
-  object-fit: contain;
-}
+
+/* Configuração da Animação */
+.certifications-scroller[data-speed="slow"] { --_animation-duration: 60s; }
+.certifications-scroller[data-speed="fast"] { --_animation-duration: 20s; }
+
 @keyframes scroll {
-  to { transform: translate(-50%); }
+  to { transform: translate(calc(-50% - 10px)); }
+}
+
+/* Estilo de cada Card de Certificado */
+.cert-item {
+  width: 220px; /* Largura fixa para consistência */
+  height: 160px; /* Altura fixa */
+  background-color: #1a1d21;
+  border-radius: 12px;
+  border: 1px solid #2d3436;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
+}
+
+.cert-item:hover {
+  transform: translateY(-5px);
+  border-color: #e36049; /* Cor de destaque no hover */
+}
+
+.cert-item img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Garante que a imagem inteira caia dentro do card */
+  border-radius: 4px;
 }
 </style>

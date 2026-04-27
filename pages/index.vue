@@ -1,4 +1,4 @@
-<template>
+I <template>
   <div>
     <CommonScrollTop />
     <Header />
@@ -34,14 +34,14 @@
   border: 2px solid #2d3436; transition: 0.3s; height: 100%;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
-.skill-icon img { max-width: 65px; margin-bottom: 15px; }
+.skill-icon img { max-width: 60px; margin-bottom: 15px; }
 h5 { color: #fff; font-size: 15px; margin: 0; font-weight: 600; }
-.glow-yellow:hover { border-color: #ffdf5e; box-shadow: 0 0 15px #ffdf5e; }
-.glow-orange:hover { border-color: #ff9900; box-shadow: 0 0 15px #ff9900; }
-.glow-blue:hover { border-color: #2496ed; box-shadow: 0 0 15px #2496ed; }
-.glow-white:hover { border-color: #ffffff; box-shadow: 0 0 15px #ffffff; }
-.glow-green:hover { border-color: #68a063; box-shadow: 0 0 15px #68a063; }
-.glow-cyan:hover { border-color: #61dafb; box-shadow: 0 0 15px #61dafb; }
-.glow-lightblue:hover { border-color: #38bdf8; box-shadow: 0 0 15px #38bdf8; }
-.glow-brightgreen:hover { border-color: #3ecf8e; box-shadow: 0 0 15px #3ecf8e; }
+.glow-yellow:hover { border-color: #ffdf5e; box-shadow: 0 0 13px #ffdf5e; }
+.glow-orange:hover { border-color: #ff9900; box-shadow: 0 0 13px #ff9900; }
+.glow-blue:hover { border-color: #2496ed; box-shadow: 0 0 13px #2496ed; }
+.glow-white:hover { border-color: #ffffff; box-shadow: 0 0 13px #ffffff; }
+.glow-green:hover { border-color: #68a063; box-shadow: 0 0 13px #68a063; }
+.glow-cyan:hover { border-color: #61dafb; box-shadow: 0 0 13px #61dafb; }
+.glow-lightblue:hover { border-color: #38bdf8; box-shadow: 0 0 13px #38bdf8; }
+.glow-brightgreen:hover { border-color: #3ecf8e; box-shadow: 0 0 13px #3ecf8e; }
 </style>

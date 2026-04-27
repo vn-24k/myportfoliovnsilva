@@ -1,18 +1,22 @@
 <script setup>
+<script setup>
 import { onMounted } from 'vue';
 
 onMounted(() => {
   // Configuração do Carrossel Infinito
   const scroller = document.querySelector(".certifications-scroller");
-  const scrollerInner = scroller.querySelector(".scroller__inner");
-  const scrollerContent = Array.from(scrollerInner.children);
+  // Adicionada verificação de segurança caso o elemento não exista
+  if (scroller) {
+    const scrollerInner = scroller.querySelector(".scroller__inner");
+    const scrollerContent = Array.from(scrollerInner.children);
 
-  // Clona os itens para criar o efeito infinito
-  scrollerContent.forEach((item) => {
-    const duplicatedItem = item.cloneNode(true);
-    duplicatedItem.setAttribute("aria-hidden", true);
-    scrollerInner.appendChild(duplicatedItem);
-  });
+    // Clona os itens para criar o efeito infinito
+    scrollerContent.forEach((item) => {
+      const duplicatedItem = item.cloneNode(true);
+      duplicatedItem.setAttribute("aria-hidden", true);
+      scrollerInner.appendChild(duplicatedItem);
+    });
+  }
 });
 </script>
 
@@ -49,7 +53,9 @@ onMounted(() => {
               </ul>
             </div>
             <div class="hero-btns">
-              <NuxtLink to="/contact" class="theme-btn download-btn">Download CV <i class="ri-download-line"></i></NuxtLink>
+              <a href="/Vinicius_Caetano_CV.pdf" download="Vinicius_Caetano_CV.pdf" class="theme-btn download-btn">
+                Download CV <i class="ri-download-line"></i>
+              </a>
             </div>
           </div>
 
@@ -76,11 +82,10 @@ onMounted(() => {
 
 <style scoped>
 /* 1. FONTES E ESTILOS DO TEXTO */
-/* Importa uma fonte moderna e robusta para o nome */
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
 
 .display-name {
-  font-family: 'Syne', sans-serif; /* Nova fonte aplicada aqui */
+  font-family: 'Syne', sans-serif;
   font-weight: 800;
   font-size: 36px;
   color: #fff;
@@ -102,7 +107,7 @@ onMounted(() => {
 }
 
 .status-icon { color: #3ecf8e; margin-right: 10px; }
-.download-btn { background-color: #e36049; border: none; }
+.download-btn { background-color: #e36049; border: none; cursor: pointer; display: inline-block; }
 
 /* 2. ESTILOS DO CARROSSEL DE CERTIFICADOS (PROFISSIONAL) */
 .about-content-part-bottom {
@@ -118,16 +123,13 @@ onMounted(() => {
   font-weight: 600;
 }
 
-/* Container principal do scroller */
 .certifications-scroller {
   max-width: 100%;
   overflow: hidden;
-  /* Máscara de gradiente para suavizar as bordas (efeito premium) */
   -webkit-mask: linear-gradient(90deg, transparent, white 15%, white 85%, transparent);
   mask: linear-gradient(90deg, transparent, white 15%, white 85%, transparent);
 }
 
-/* Container interno que segura os itens */
 .scroller__inner {
   display: flex;
   gap: 20px;
@@ -137,7 +139,6 @@ onMounted(() => {
   animation: scroll var(--_animation-duration, 40s) var(--_animation-direction, forwards) linear infinite;
 }
 
-/* Configuração da Animação */
 .certifications-scroller[data-speed="slow"] { --_animation-duration: 60s; }
 .certifications-scroller[data-speed="fast"] { --_animation-duration: 20s; }
 
@@ -145,10 +146,9 @@ onMounted(() => {
   to { transform: translate(calc(-50% - 10px)); }
 }
 
-/* Estilo de cada Card de Certificado */
 .cert-item {
-  width: 220px; /* Largura fixa para consistência */
-  height: 160px; /* Altura fixa */
+  width: 220px;
+  height: 160px;
   background-color: #1a1d21;
   border-radius: 12px;
   border: 1px solid #2d3436;
@@ -162,13 +162,13 @@ onMounted(() => {
 
 .cert-item:hover {
   transform: translateY(-5px);
-  border-color: #e36049; /* Cor de destaque no hover */
+  border-color: #e36049;
 }
 
 .cert-item img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain; /* Garante que a imagem inteira caia dentro do card */
+  object-fit: contain;
   border-radius: 4px;
 }
 </style>

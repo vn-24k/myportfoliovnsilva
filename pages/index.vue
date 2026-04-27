@@ -1,9 +1,18 @@
 <script setup>
+import { onMounted } from 'vue';
 import Header from "~/layouts/Header.vue";
 import Footer from "~/layouts/Footer.vue";
 import HomeAIStatus from "~/components/home/AIStatus.vue";
 import LiveMetrics from "~/components/home/LiveMetrics.vue";
 import MetricsPanel from "~/components/home/MetricsPanel.vue";
+
+// Lógica para rastrear a posição do mouse e aplicar ao brilho
+onMounted(() => {
+  window.addEventListener("mousemove", (e) => {
+    document.body.style.setProperty("--mouse-x", `${e.clientX}px`);
+    document.body.style.setProperty("--mouse-y", `${e.clientY}px`);
+  });
+});
 </script>
 
 <template>
@@ -39,6 +48,24 @@ import MetricsPanel from "~/components/home/MetricsPanel.vue";
 </template>
 
 <style scoped>
+/* Efeito de brilho sutil (Elite Interaction) */
+:global(body::before) {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, -100px) var(--mouse-y, -100px), 
+    rgba(255, 255, 255, 0.03), 
+    transparent 40%
+  );
+  z-index: 9999;
+}
+
+/* Seus estilos existentes */
 .hero-skills-area { padding: 40px 0; background-color: #0f1114; }
 .skills-grid { display: flex; flex-wrap: wrap; justify-content: center; }
 .skill-item-wrapper { padding: 10px; width: 50%; }

@@ -2,10 +2,10 @@
 import { onMounted } from 'vue';
 
 onMounted(() => {
-  const scrollerInner = document.querySelector(".scroller__inner");
+  const scroller = document.querySelector(".certifications-scroller");
+  const scrollerInner = scroller.querySelector(".scroller__inner");
   const scrollerContent = Array.from(scrollerInner.children);
 
-  // Duplica os itens para criar o loop infinito perfeito
   scrollerContent.forEach((item) => {
     const duplicatedItem = item.cloneNode(true);
     duplicatedItem.setAttribute("aria-hidden", true);
@@ -45,9 +45,9 @@ onMounted(() => {
             </div>
           </div>
 
-          <div style="margin-top: 50px; text-align: center;">
+          <div class="skills-section-wrapper" style="margin-top: 50px;">
             <h2 class="section-title">Skills</h2>
-          </div>
+            </div>
         </div>
       </div>
     </div>
@@ -60,22 +60,19 @@ onMounted(() => {
 .display-name { font-family: 'Syne', sans-serif; font-size: 36px; color: #fff; margin-top: 20px; }
 .section-title { font-size: 20px; color: #fff; margin-bottom: 20px; font-weight: 600; }
 
-/* Animação Infinita */
+/* Carrossel com suporte a toque */
 .certifications-scroller {
-  overflow: hidden; /* Oculta a barra de scroll */
-  mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+  max-width: 100%;
+  overflow-x: auto; /* Permite scroll manual */
+  -webkit-overflow-scrolling: touch; /* Suavidade no iOS */
+  touch-action: pan-x; /* Garante que o navegador entenda o gesto horizontal */
+  padding-bottom: 10px;
 }
 
 .scroller__inner {
   display: flex;
   gap: 20px;
   width: max-content;
-  animation: scroll 40s linear infinite; /* Roda sozinho, devagar e infinito */
-}
-
-@keyframes scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); } /* Move exatamente a metade (os itens clonados) */
 }
 
 .cert-item {
@@ -88,7 +85,7 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   padding: 10px;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Impede que os itens fiquem espremidos */
 }
 
 .cert-item img {

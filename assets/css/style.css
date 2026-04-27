@@ -3054,3 +3054,28 @@ a span{
 h3 a{
     color: #9f9f9f !important;
 }
+
+/*
+* ----------------------------------------------------------------------------------------
+* EFEITO DE BRILHO (ELITE INTERACTION)
+* ----------------------------------------------------------------------------------------
+*/
+body {
+    position: relative; /* Garante que o brilho siga o contexto do corpo */
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Garante que o brilho não atrapalhe cliques em botões */
+    background: radial-gradient(
+        600px circle at var(--mouse-x, -100px) var(--mouse-y, -100px), 
+        rgba(255, 255, 255, 0.03), 
+        transparent 40%
+    );
+    z-index: 9999; /* Fica acima de todo o conteúdo */
+}

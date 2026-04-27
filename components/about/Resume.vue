@@ -23,7 +23,7 @@
                   <div class="content">
                     <span class="years">2023 - 2025</span>
                     <h4>Desenvolvedor Backend Sênior</h4>
-                    <span class="company">Cloud Systems Corp</span>
+                    <span class="company">Cloud Systems Cor</span>
                   </div>
                 </div>
                 <div class="resume-item wow fadeInUp delay-0-3s">

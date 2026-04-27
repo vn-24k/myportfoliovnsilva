@@ -7,14 +7,14 @@
     <section class="hero-skills-area">
       <div class="container">
         <div class="row skills-grid">
-          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-yellow"><div class="skill-icon"><img src="~/assets/images/python.png" /></div><h5>Python</h5></div></div>
-          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-orange"><div class="skill-icon"><img src="~/assets/images/aws.png" /></div><h5>AWS</h5></div></div>
-          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-blue"><div class="skill-icon"><img src="~/assets/images/docker.png" /></div><h5>Docker</h5></div></div>
-          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-white"><div class="skill-icon"><img src="~/assets/images/nextjs.png" /></div><h5>NextJS</h5></div></div>
-          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-green"><div class="skill-icon"><img src="~/assets/images/node.png" /></div><h5>Node JS</h5></div></div>
-          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-cyan"><div class="skill-icon"><img src="~/assets/images/react.png" /></div><h5>ReactJS</h5></div></div>
-          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-lightblue"><div class="skill-icon"><img src="~/assets/images/tailwind.png" /></div><h5>Tailwind</h5></div></div>
-          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-brightgreen"><div class="skill-icon"><img src="~/assets/images/supabase.png" /></div><h5>Supabase</h5></div></div>
+          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-yellow"><div class="skill-icon"><img src="https://raw.githubusercontent.com/vn-24k/myportfoliovnsilva/main/assets/images/python.png" /></div><h5>Python</h5></div></div>
+          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-orange"><div class="skill-icon"><img src="https://raw.githubusercontent.com/vn-24k/myportfoliovnsilva/main/assets/images/aws.png" /></div><h5>AWS</h5></div></div>
+          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-blue"><div class="skill-icon"><img src="https://raw.githubusercontent.com/vn-24k/myportfoliovnsilva/main/assets/images/docker.png" /></div><h5>Docker</h5></div></div>
+          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-white"><div class="skill-icon"><img src="https://raw.githubusercontent.com/vn-24k/myportfoliovnsilva/main/assets/images/nextjs.png" /></div><h5>NextJS</h5></div></div>
+          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-green"><div class="skill-icon"><img src="https://raw.githubusercontent.com/vn-24k/myportfoliovnsilva/main/assets/images/node.png" /></div><h5>Node JS</h5></div></div>
+          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-cyan"><div class="skill-icon"><img src="https://raw.githubusercontent.com/vn-24k/myportfoliovnsilva/main/assets/images/react.png" /></div><h5>ReactJS</h5></div></div>
+          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-lightblue"><div class="skill-icon"><img src="https://raw.githubusercontent.com/vn-24k/myportfoliovnsilva/main/assets/images/tailwind.png" /></div><h5>Tailwind</h5></div></div>
+          <div class="col-6 skill-item-wrapper"><div class="skill-item glow-brightgreen"><div class="skill-icon"><img src="https://raw.githubusercontent.com/vn-24k/myportfoliovnsilva/main/assets/images/supabase.png" /></div><h5>Supabase</h5></div></div>
         </div>
       </div>
     </section>

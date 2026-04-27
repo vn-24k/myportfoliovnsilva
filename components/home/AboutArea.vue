@@ -42,7 +42,7 @@ onMounted(() => {
           <div class="about-image-part wow fadeInUp delay-0-3s">
             <img src="~/assets/images/about/profile.png" alt="About Me" />
             <h2>Vinícius Silva</h2>
-            <p>I am a Web Designer based in san francisco.</p>
+            <p>I am a Web Designer based in san francisco...</p>
             <div class="about-social text-center">
               <ul>
                 <li>

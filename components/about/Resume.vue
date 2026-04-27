@@ -10,7 +10,7 @@
                 <div class="resume-item wow fadeInUp delay-0-3s">
                   <div class="icon"><i class="ri-cpu-line"></i></div>
                   <div class="content">
-                    <span class="years">2025 - Presente</span>
+                    <span class="years">2026 - Presente</span>
                     <h4>Engenheiro de IA & LLMs</h4>
                     <span class="company">Projetos Independentes & Consultoria</span>
                   </div>

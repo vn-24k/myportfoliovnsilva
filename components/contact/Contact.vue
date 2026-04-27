@@ -20,7 +20,7 @@
                   <i class="ri-map-pin-line"></i>
                 </div>
                 <h2>our office:</h2>
-                <p>Jurain,Dhaka Bangladesh</p>
+                <p>São Paulo - Brasil</p>
               </div>
               <!-- / END CONTACT SINGLEDESIGN AREA -->
               <!-- START CONTACT SINGLEDESIGN AREA -->
@@ -29,7 +29,7 @@
                   <i class="ri-phone-line"></i>
                 </div>
                 <h2>contact number:</h2>
-                <p>+1234321321</p>
+                <p>+5511910896158</p>
               </div>
               <!-- / END CONTACT SINGLEDESIGN AREA -->
               <!-- START CONTACT SINGLEDESIGN AREA -->
@@ -38,7 +38,7 @@
                   <i class="ri-mail-line"></i>
                 </div>
                 <h2>Email us:</h2>
-                <p>websitename@mail.com</p>
+                <p>imports.vclb@gmail.com</p>
               </div>
               <!-- / END CONTACT SINGLEDESIGN AREA -->
             </div>

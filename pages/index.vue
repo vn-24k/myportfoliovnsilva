@@ -1,13 +1,13 @@
 <script setup>
 import Header from "~/layouts/Header.vue";
 import Footer from "~/layouts/Footer.vue";
+import HomeAIStatus from "~/components/home/AIStatus.vue";
 </script>
 
 <template>
   <div>
     <CommonScrollTop />
     <Header />
-    
     <HomeAboutArea />
 
     <section class="hero-skills-area">
@@ -25,7 +25,8 @@ import Footer from "~/layouts/Footer.vue";
       </div>
     </section>
 
-    <HomePortfolioArea />
+    <HomeAIStatus />
+    
     <HomeCtaArea />
     <Footer />
   </div>

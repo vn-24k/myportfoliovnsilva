@@ -2,6 +2,7 @@
 import Header from "~/layouts/Header.vue";
 import Footer from "~/layouts/Footer.vue";
 import HomeAIStatus from "~/components/home/AIStatus.vue";
+import LiveMetrics from "~/components/home/LiveMetrics.vue"; // 1. Importação
 </script>
 
 <template>
@@ -26,13 +27,13 @@ import HomeAIStatus from "~/components/home/AIStatus.vue";
     </section>
 
     <HomeAIStatus />
-    
-    <HomeCtaArea />
+    <LiveMetrics /> <HomeCtaArea />
     <Footer />
   </div>
 </template>
 
 <style scoped>
+/* CSS antigo mantido */
 .hero-skills-area { padding: 40px 0; background-color: #0f1114; }
 .skills-grid { display: flex; flex-wrap: wrap; justify-content: center; }
 .skill-item-wrapper { padding: 10px; width: 50%; }

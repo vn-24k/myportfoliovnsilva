@@ -30,6 +30,12 @@ onMounted(() => {
             <img src="~/assets/images/about/profile.png" alt="About Me" />
             <h2>Vinícius Silva</h2>
             <p>Backend & DevOps Specialist</p>
+            <div class="about-social text-center">
+              <ul>
+                <li><a href="https://github.com/vn-24k" target="_blank"><i class="ri-github-line"></i></a></li>
+                <li><a href="https://linkedin.com" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -65,3 +71,25 @@ onMounted(() => {
     </div>
   </section>
 </template>
+
+<style scoped>
+.scroller[data-animated="true"] {
+  overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+  mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+}
+.scroller__inner {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: scroll 30s linear infinite;
+}
+.scroller__inner img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+@keyframes scroll {
+  to { transform: translate(-50%); }
+}
+</style>

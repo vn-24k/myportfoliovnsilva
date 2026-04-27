@@ -3073,9 +3073,9 @@ body::before {
     height: 100%;
     pointer-events: none; /* Garante que o brilho não atrapalhe cliques em botões */
     background: radial-gradient(
-        600px circle at var(--mouse-x, -100px) var(--mouse-y, -100px), 
-        rgba(255, 255, 255, 0.03), 
-        transparent 40%
+       100px circle at var(--mouse-x, -100px) var(--mouse-y, -100px), 
+        rgba(255, 255, 255, 0.04), 
+        transparent 20%
     );
     z-index: 9999; /* Fica acima de todo o conteúdo */
 }

@@ -23,45 +23,15 @@ const handleDownload = () => {
   link.click();
   document.body.removeChild(link);
 };
-<script setup>
-import { onMounted } from 'vue';
-
-onMounted(() => {
-  const scroller = document.querySelector(".certifications-scroller");
-  if (scroller) {
-    const scrollerInner = scroller.querySelector(".scroller__inner");
-    const scrollerContent = Array.from(scrollerInner.children);
-
-    scrollerContent.forEach((item) => {
-      const duplicatedItem = item.cloneNode(true);
-      duplicatedItem.setAttribute("aria-hidden", true);
-      scrollerInner.appendChild(duplicatedItem);
-    });
-  }
-});
-
-const handleDownload = () => {
-  const link = document.createElement('a');
-  link.href = '/Vinicius_Caetano_CV.pdf';
-  link.setAttribute('download', 'Vinicius_Caetano_CV.pdf');
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-};
 </script>
 
 <template>
   <section id="about" class="about-area">
     <div class="container">
       <div class="row">
-        
         <div class="col-lg-4">
           <div class="about-image-part wow fadeInUp delay-0-3s">
-            <img 
-              src="~/assets/images/about/profile.png" 
-              alt="Vinícius Silva" 
-              style="width: 280px; height: 280px; object-fit: cover; border-radius: 25px; border: 2px solid #b4b4b4; box-shadow: 0 0 15px rgba(180, 180, 180, 0.5), 0 0 30px rgba(180, 180, 180, 0.2);"
-            />
+            <img src="~/assets/images/about/profile.png" alt="Vinícius Silva" class="profile-img" />
             
             <h2 class="display-name">Vinícius Silva</h2>
             <p>Backend & DevOps Specialist</p>
@@ -81,13 +51,11 @@ const handleDownload = () => {
             <h2 class="hero-description">
               I'm <span class="highlight-name">Vinícius Silva</span>, um Especialista em IA e Backend criando sistemas inteligentes por meio de redes neurais e infraestrutura automatizada.
             </h2>
-            
             <div class="adress-field">
               <ul>
                 <li><i class="ri-circle-fill status-icon"></i>Disponível para trabalho freelancer</li>
               </ul>
             </div>
-            
             <div class="hero-btns">
               <button @click="handleDownload" class="theme-btn download-btn">
                 Download CV <i class="ri-download-line"></i>
@@ -108,7 +76,6 @@ const handleDownload = () => {
               </div>
             </div>
           </div>
-          
         </div>
       </div>
     </div>
@@ -118,7 +85,17 @@ const handleDownload = () => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
 
-/* ESTILOS ORIGINAIS MANTIDOS */
+/* ESTILO APLICADO À CLASSE ORIGINAL */
+.profile-img {
+  width: 280px; 
+  height: 280px;
+  object-fit: cover;
+  border-radius: 25px; /* Cantos arredondados */
+  border: 2px solid #808080; /* Borda cinza */
+  box-shadow: 0 0 15px rgba(128, 128, 128, 0.6); /* Neon cinza */
+  transition: all 0.3s ease;
+}
+
 .display-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 36px; color: #fff; margin-top: 20px; letter-spacing: -1px; }
 .highlight-name { font-family: 'Syne', sans-serif; font-weight: 700; color: #fff; }
 .hero-description { font-size: 28px; line-height: 1.4; color: #a0a0a0; font-weight: 400; }

@@ -48,13 +48,13 @@ const handleDownload = () => {
         
         <div class="col-lg-8">
           <div class="about-content-part wow fadeInUp delay-0-2s">
-            <p class="hello-text">Hello There!</p>
+            <p class="hello-text">Olá!</p>
             <h2 class="hero-description">
-              I'm <span class="highlight-name">Vinícius Silva</span>, an AI & Backend Specialist crafting intelligent systems through neural networks and automated infrastructure.
+              I'm <span class="highlight-name">Vinícius Silva</span>, 
+            <div class="adress-field">um Especialista em IA e Backend criando sistemas inteligentes por meio de redes neurais e infraestrutura automatizada.
             </h2>
-            <div class="adress-field">
               <ul>
-                <li><i class="ri-circle-fill status-icon"></i>Available for Freelancing</li>
+                <li><i class="ri-circle-fill status-icon"></i>Disponível para trabalho freelancer</li>
               </ul>
             </div>
             

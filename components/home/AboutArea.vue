@@ -6,7 +6,6 @@ onMounted(() => {
   if (scroller) {
     const scrollerInner = scroller.querySelector(".scroller__inner");
     const scrollerContent = Array.from(scrollerInner.children);
-
     scrollerContent.forEach((item) => {
       const duplicatedItem = item.cloneNode(true);
       duplicatedItem.setAttribute("aria-hidden", true);
@@ -29,13 +28,12 @@ const handleDownload = () => {
   <section id="about" class="about-area">
     <div class="container">
       <div class="row">
-        
         <div class="col-lg-4">
           <div class="about-image-part wow fadeInUp delay-0-3s">
             <img 
               src="~/assets/images/about/profile.png" 
               alt="Vinícius Silva" 
-              style="width: 280px; height: 280px; object-fit: cover; border-radius: 25px; border: 2px solid #808080; box-shadow: 0 0 15px rgba(128, 128, 128, 0.6);" 
+              class="my-profile-custom-img" 
             />
             
             <h2 class="display-name">Vinícius Silva</h2>
@@ -56,13 +54,11 @@ const handleDownload = () => {
             <h2 class="hero-description">
               I'm <span class="highlight-name">Vinícius Silva</span>, um Especialista em IA e Backend criando sistemas inteligentes por meio de redes neurais e infraestrutura automatizada.
             </h2>
-            
             <div class="adress-field">
               <ul>
                 <li><i class="ri-circle-fill status-icon"></i>Disponível para trabalho freelancer</li>
               </ul>
             </div>
-            
             <div class="hero-btns">
               <button @click="handleDownload" class="theme-btn download-btn">
                 Download CV <i class="ri-download-line"></i>
@@ -91,6 +87,18 @@ const handleDownload = () => {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
+
+/* Forçando o estilo nesta classe específica */
+.my-profile-custom-img {
+  width: 280px !important;
+  height: 280px !important;
+  object-fit: cover !important;
+  border-radius: 25px !important;
+  border: 2px solid #808080 !important;
+  box-shadow: 0 0 15px rgba(128, 128, 128, 0.6) !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
 
 .display-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 36px; color: #fff; margin-top: 20px; letter-spacing: -1px; }
 .highlight-name { font-family: 'Syne', sans-serif; font-weight: 700; color: #fff; }

@@ -87,26 +87,35 @@ const handleDownload = () => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
 
-/* --- CSS NOVO PARA O HEXÁGONO COM NEON CINZA --- */
+/* --- CSS CORRIGIDO PARA QUADRADO ARREDONDADO COM NEON CINZA FORTE --- */
 .profile-img {
   width: 280px; 
   height: 280px;
   object-fit: cover;
-  /* Formato Hexagonal */
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  /* Brilho Neon Cinza (ajuste o 0.4 para mais ou menos brilho) */
-  filter: drop-shadow(0 0 8px rgba(180, 180, 180, 0.6)) 
-          drop-shadow(0 0 15px rgba(180, 180, 180, 0.3));
+  
+  /* 1. Quadrado Arredondado (sem quinas agressivas) */
+  border-radius: 25px; /* Ajuste este valor para mais ou menos curva */
+  
+  /* 2. Borda Neon Cinza Forte e Visível */
+  /* Removemos o clip-path e o drop-shadow para usar box-shadow, que é mais compatível e forte */
+  border: 2px solid rgba(180, 180, 180, 0.3); /* Borda cinza sutil na imagem */
+  box-shadow: 0 0 10px rgba(180, 180, 180, 0.7),   /* Brilho interno */
+              0 0 20px rgba(180, 180, 180, 0.4),   /* Brilho médio */
+              0 0 30px rgba(180, 180, 180, 0.2);   /* Brilho externo amplo */
+  
   transition: all 0.4s ease;
 }
 
 .profile-img:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(0 0 12px rgba(220, 220, 220, 0.8)) 
-          drop-shadow(0 0 25px rgba(220, 220, 220, 0.4));
+  transform: scale(1.02);
+  /* Aumenta o brilho neon no hover */
+  box-shadow: 0 0 15px rgba(220, 220, 220, 0.9), 
+              0 0 25px rgba(220, 220, 220, 0.6), 
+              0 0 40px rgba(220, 220, 220, 0.3);
+  border-color: rgba(220, 220, 220, 0.5);
 }
 
-/* --- ESTILOS ORIGINAIS --- */
+/* --- ESTILOS ORIGINAIS SEM ALTERAÇÃO --- */
 .display-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 36px; color: #fff; margin-top: 20px; letter-spacing: -1px; }
 .highlight-name { font-family: 'Syne', sans-serif; font-weight: 700; color: #fff; }
 .hero-description { font-size: 28px; line-height: 1.4; color: #a0a0a0; font-weight: 400; }
@@ -120,4 +129,4 @@ const handleDownload = () => {
 .cert-item { width: 220px; height: 160px; background-color: #1a1d21; border-radius: 12px; border: 1px solid #2d3436; padding: 10px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
 .cert-item:hover { transform: translateY(-5px); border-color: #e36049; }
 .cert-item img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
-</style>
+</style> 

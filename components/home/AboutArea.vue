@@ -2,7 +2,6 @@
 import { onMounted } from 'vue';
 
 onMounted(() => {
-  // Mantive sua lógica original do carrossel
   const scroller = document.querySelector(".certifications-scroller");
   if (scroller) {
     const scrollerInner = scroller.querySelector(".scroller__inner");
@@ -16,7 +15,6 @@ onMounted(() => {
   }
 });
 
-// Mantive sua lógica de download
 const handleDownload = () => {
   const link = document.createElement('a');
   link.href = '/Vinicius_Caetano_CV.pdf';
@@ -37,7 +35,7 @@ const handleDownload = () => {
             <img 
               src="~/assets/images/about/profile.png" 
               alt="Vinícius Silva" 
-              class="profile-img profile-img-elite" 
+              style="width: 280px; height: 280px; object-fit: cover; border-radius: 25px; border: 2px solid #808080; box-shadow: 0 0 15px rgba(128, 128, 128, 0.6);" 
             />
             
             <h2 class="display-name">Vinícius Silva</h2>
@@ -94,51 +92,7 @@ const handleDownload = () => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
 
-/* --- NOVO CSS: FORÇA O ESTILO DA HOME NO ABOUT --- */
-/* Criei uma classe específica para garantir que o estilo da Home seja aplicado aqui */
-.profile-img-elite {
-  /* Tamanho Exato e Corte */
-  width: 280px !important;
-  height: 280px !important;
-  object-fit: cover !important;
-  
-  /* Cantos Arredondados - A curva exata que você marcou */
-  border-radius: 25px !important;
-  
-  /* Borda Neon Cinza - Cor e Brilho */
-  border: 2px solid rgba(180, 180, 180, 0.4) !important;
-  box-shadow: 
-    0 0 15px rgba(180, 180, 180, 0.5) !important, 
-    0 0 30px rgba(180, 180, 180, 0.2) !important;
-  
-  /* Transição Suave */
-  transition: all 0.4s ease !important;
-}
-
-.profile-img-elite:hover {
-  /* Efeito de hover Elite */
-  transform: scale(1.03) !important;
-  box-shadow: 
-    0 0 20px rgba(220, 220, 220, 0.8) !important, 
-    0 0 40px rgba(220, 220, 220, 0.4) !important;
-  border-color: rgba(220, 220, 220, 0.6) !important;
-}
-
-/* --- ESTILOS ORIGINAIS MANTIDOS --- */
 .display-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 36px; color: #fff; margin-top: 20px; letter-spacing: -1px; }
-.highlight-name { font-family: 'Syne', sans-serif; font-weight: 700; color: #fff; }
-.hero-description { font-size: 28px; line-height: 1.4; color: #a0a0a0; font-weight: 400; }
-.status-icon { color: #3ecf8e; margin-right: 10px; }
-.download-btn { background-color: #e36049; border: none; cursor: pointer; color: #fff !important; }
-.about-content-part-bottom { margin-top: 60px; border-top: 1px solid #2d3436; padding-top: 40px; }
-.section-title { font-size: 20px; color: #fff; margin-bottom: 30px; font-weight: 600; }
-.certifications-scroller { max-width: 100%; overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, white 15%, white 85%, transparent); mask: linear-gradient(90deg, transparent, white 15%, white 85%, transparent); }
-.scroller__inner { display: flex; gap: 20px; padding: 10px 0; width: max-content; animation: scroll 60s linear infinite; }
-@keyframes scroll { to { transform: translate(calc(-50% - 10px)); } }
-.cert-item { width: 220px; height: 160px; background-color: #1a1d21; border-radius: 12px; border: 1px solid #2d3436; padding: 10px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
-.cert-item:hover { transform: translateY(-5px); border-color: #e36049; }
-.cert-item img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
-</style>
 .highlight-name { font-family: 'Syne', sans-serif; font-weight: 700; color: #fff; }
 .hero-description { font-size: 28px; line-height: 1.4; color: #a0a0a0; font-weight: 400; }
 .status-icon { color: #3ecf8e; margin-right: 10px; }

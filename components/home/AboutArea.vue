@@ -52,7 +52,7 @@ const handleDownload = () => {
           <div class="about-content-part wow fadeInUp delay-0-2s">
             <p class="hello-text">Olá!</p>
             <h2 class="hero-description">
-              I'm <span class="highlight-name">Vinícius Silva</span>, um Especialista em IA e Backend criando sistemas inteligentes por meio de redes neurais e infraestrutura automatizada.
+              I'm <span class="highlight-name">Vinícius Silva</span>, Cresci desmontando coisas para entender como funcionavam. Computadores, sistemas, lógica de negócio. Essa curiosidade virou carreira.Hoje construo sistemas backend que integram IA de forma funcional: pipelines que processam dados, agentes autônomos que executam tarefas complexas, APIs que sustentam produtos reais. Python, LangChain, cloud.
             </h2>
             <div class="adress-field">
               <ul>

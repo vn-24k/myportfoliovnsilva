@@ -37,7 +37,7 @@ const handleDownload = () => {
             />
             
             <h2 class="display-name">Vinícius Silva</h2>
-            <p>Backend & DevOps Specialist</p>
+            <p>Engenheiro de Software Full Stack</p>
             
             <div class="about-social text-center">
               <ul>

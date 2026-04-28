@@ -13,14 +13,14 @@ const portfolio_data = [
   {
     id: 1,
     img: portfolio_img_1,
-    category: "Design",
-    title: "Mobile Application Design",
+    category: "Backend & APIs",
+    title: "IA e Orquestração de Agentes",
   },
   {
     id: 2,
     img: portfolio_img_2,
-    category: "Branding",
-    title: "Website Makeup Design",
+    category: "Gist.AI Summarizer",
+    title: "Ferramenta de IA que processa grandes volumes de texto e gera resumos executivos com precisão.",
   },
   {
     id: 3,
@@ -31,8 +31,8 @@ const portfolio_data = [
   {
     id: 4,
     img: portfolio_img_4,
-    category: "Game",
-    title: "Mobile Application Design",
+    category: "Agente de IA Cognitiva",
+    title: "Assistente inteligente utilizando GPT-4 e Engenharia de Prompt para automação de tarefas complexas.",
   },
   {
     id: 5,

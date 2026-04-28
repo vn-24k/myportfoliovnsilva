@@ -36,7 +36,7 @@ const handleDownload = () => {
               class="my-profile-custom-img" 
             />
             
-            <h2 class="display-name highlight-name">Vinícius Silva</h2>
+            <h2 class="display-name highlight-name">V.Caetano!</h2>
             <p>Engenheiro de Software Full Stack</p>
             
             <div class="about-social text-center centraliza-icones">

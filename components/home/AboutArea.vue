@@ -36,10 +36,10 @@ const handleDownload = () => {
               class="my-profile-custom-img" 
             />
             
-            <h2 class="display-name">Vinícius Silva</h2>
+            <h2 class="display-name highlight-name">Vinícius Silva</h2>
             <p>Engenheiro de Software Full Stack</p>
             
-            <div class="about-social text-center">
+            <div class="about-social text-center centraliza-icones">
               <ul>
                 <li><a href="https://linkedin.com/in/viniciussilva" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
                 <li><a href="https://github.com/vn-24k" target="_blank"><i class="ri-github-line"></i></a></li>
@@ -88,7 +88,15 @@ const handleDownload = () => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
 
-/* Forçando o estilo nesta classe específica */
+/* Centralização dos Ícones */
+.centraliza-icones ul {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 20px !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
 .my-profile-custom-img {
   width: 280px !important;
   height: 280px !important;

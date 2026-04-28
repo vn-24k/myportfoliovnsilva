@@ -53,13 +53,61 @@ const handleDownload = () => {
               </ul>
             </div>
           </div>
+<script setup>
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  const scroller = document.querySelector(".certifications-scroller");
+  if (scroller) {
+    const scrollerInner = scroller.querySelector(".scroller__inner");
+    const scrollerContent = Array.from(scrollerInner.children);
+    scrollerContent.forEach((item) => {
+      const duplicatedItem = item.cloneNode(true);
+      duplicatedItem.setAttribute("aria-hidden", true);
+      scrollerInner.appendChild(duplicatedItem);
+    });
+  }
+});
+
+const handleDownload = () => {
+  const link = document.createElement('a');
+  link.href = '/Vinicius_Caetano_CV.pdf';
+  link.setAttribute('download', 'Vinicius_Caetano_CV.pdf');
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+</script>
+
+<template>
+  <section id="about" class="about-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="about-image-part wow fadeInUp delay-0-3s">
+            <img 
+              src="~/assets/images/about/profile.png" 
+              alt="Vinícius Silva" 
+              class="my-profile-custom-img" 
+            />
+            
+            <h2 class="display-name highlight-name">Vinícius Silva</h2>
+            <p>Engenheiro de Software Full Stack</p>
+            
+            <div class="about-social text-center centraliza-icones">
+              <ul>
+                <li><a href="https://linkedin.com/in/viniciussilva" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
+                <li><a href="https://github.com/vn-24k" target="_blank"><i class="ri-github-line"></i></a></li>
+              </ul>
+            </div>
+          </div>
         </div>
         
         <div class="col-lg-8">
           <div class="about-content-part wow fadeInUp delay-0-2s">
             <p class="hello-text">Olá!</p>
             <h2 class="hero-description">
-              I'm <span class="highlight-name">Vinícius Silva</span>, um engenheiro movido por desconstruir sistemas. Hoje, transformo lógica em soluções: construo backends robustos, pipelines de dados e agentes de IA autônomos. Uso Python, LangChain e Cloud para dar vida a produtos reais e escaláveis.
+              I'm <span class="highlight-name">Vinícius Silva</span>, um engenheiro movido pela curiosidade de desconstruir sistemas. Hoje, transformo essa lógica em soluções: construo backends robustos, pipelines de dados e agentes de IA autônomos. Python, LangChain e Cloud são minhas ferramentas para dar vida a produtos reais.
             </h2>
             <div class="adress-field">
               <ul>
@@ -106,29 +154,6 @@ const handleDownload = () => {
 
 .my-profile-custom-img {
   width: 280px !important;
-  height: 280px !important;
-  object-fit: cover !important;
-  border-radius: 25px !important;
-  border: 2px solid #808080 !important;
-  box-shadow: 0 0 15px rgba(128, 128, 128, 0.6) !important;
-  display: block !important;
-  margin: 0 auto !important;
-}
-
-.display-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 36px; color: #fff; margin-top: 20px; letter-spacing: -1px; }
-.highlight-name { font-family: 'Syne', sans-serif; font-weight: 700; color: #fff; }
-.hero-description { font-size: 28px; line-height: 1.4; color: #a0a0a0; font-weight: 400; }
-.status-icon { color: #3ecf8e; margin-right: 10px; }
-.download-btn { background-color: #e36049; border: none; cursor: pointer; color: #fff !important; }
-.about-content-part-bottom { margin-top: 60px; border-top: 1px solid #2d3436; padding-top: 40px; }
-.section-title { font-size: 20px; color: #fff; margin-bottom: 30px; font-weight: 600; }
-.certifications-scroller { max-width: 100%; overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, white 15%, white 85%, transparent); mask: linear-gradient(90deg, transparent, white 15%, white 85%, transparent); }
-.scroller__inner { display: flex; gap: 20px; padding: 10px 0; width: max-content; animation: scroll 60s linear infinite; }
-@keyframes scroll { to { transform: translate(calc(-50% - 10px)); } }
-.cert-item { width: 220px; height: 160px; background-color: #1a1d21; border-radius: 12px; border: 1px solid #2d3436; padding: 10px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
-.cert-item:hover { transform: translateY(-5px); border-color: #e36049; }
-.cert-item img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
-</style>
   height: 280px !important;
   object-fit: cover !important;
   border-radius: 25px !important;

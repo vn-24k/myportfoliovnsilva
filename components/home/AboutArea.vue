@@ -50,9 +50,10 @@ const handleDownload = () => {
           <div class="about-content-part wow fadeInUp delay-0-2s">
             <p class="hello-text">Olá!</p>
             <h2 class="hero-description">
-              I'm <span class="highlight-name">Vinícius Silva</span>, 
-            <div class="adress-field">um Especialista em IA e Backend criando sistemas inteligentes por meio de redes neurais e infraestrutura automatizada.
+              I'm <span class="highlight-name">Vinícius Silva</span>, um Especialista em IA e Backend criando sistemas inteligentes por meio de redes neurais e infraestrutura automatizada.
             </h2>
+            
+            <div class="adress-field">
               <ul>
                 <li><i class="ri-circle-fill status-icon"></i>Disponível para trabalho freelancer</li>
               </ul>
@@ -78,6 +79,7 @@ const handleDownload = () => {
               </div>
             </div>
           </div>
+          
         </div>
       </div>
     </div>
@@ -87,46 +89,45 @@ const handleDownload = () => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
 
-/* --- CSS CORRIGIDO PARA QUADRADO ARREDONDADO COM NEON CINZA FORTE --- */
+/* --- CSS CORRIGIDO: QUADRADO ARREDONDADO + NEON CINZA --- */
 .profile-img {
   width: 280px; 
   height: 280px;
   object-fit: cover;
   
-  /* 1. Quadrado Arredondado (sem quinas agressivas) */
-  border-radius: 25px; /* Ajuste este valor para mais ou menos curva */
+  /* Arredondamento suave */
+  border-radius: 25px; 
   
-  /* 2. Borda Neon Cinza Forte e Visível */
-  /* Removemos o clip-path e o drop-shadow para usar box-shadow, que é mais compatível e forte */
-  border: 2px solid rgba(180, 180, 180, 0.3); /* Borda cinza sutil na imagem */
-  box-shadow: 0 0 10px rgba(180, 180, 180, 0.7),   /* Brilho interno */
-              0 0 20px rgba(180, 180, 180, 0.4),   /* Brilho médio */
-              0 0 30px rgba(180, 180, 180, 0.2);   /* Brilho externo amplo */
+  /* Borda Neon Cinza */
+  border: 2px solid rgba(180, 180, 180, 0.4);
+  box-shadow: 0 0 15px rgba(180, 180, 180, 0.5), 
+              0 0 30px rgba(180, 180, 180, 0.2);
   
   transition: all 0.4s ease;
 }
 
 .profile-img:hover {
-  transform: scale(1.02);
-  /* Aumenta o brilho neon no hover */
-  box-shadow: 0 0 15px rgba(220, 220, 220, 0.9), 
-              0 0 25px rgba(220, 220, 220, 0.6), 
-              0 0 40px rgba(220, 220, 220, 0.3);
-  border-color: rgba(220, 220, 220, 0.5);
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(220, 220, 220, 0.8), 
+              0 0 40px rgba(220, 220, 220, 0.4);
+  border-color: rgba(220, 220, 220, 0.6);
 }
 
-/* --- ESTILOS ORIGINAIS SEM ALTERAÇÃO --- */
+/* --- ESTILOS ORIGINAIS --- */
 .display-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 36px; color: #fff; margin-top: 20px; letter-spacing: -1px; }
 .highlight-name { font-family: 'Syne', sans-serif; font-weight: 700; color: #fff; }
 .hero-description { font-size: 28px; line-height: 1.4; color: #a0a0a0; font-weight: 400; }
 .status-icon { color: #3ecf8e; margin-right: 10px; }
 .download-btn { background-color: #e36049; border: none; cursor: pointer; color: #fff !important; }
+
 .about-content-part-bottom { margin-top: 60px; border-top: 1px solid #2d3436; padding-top: 40px; }
 .section-title { font-size: 20px; color: #fff; margin-bottom: 30px; font-weight: 600; }
+
 .certifications-scroller { max-width: 100%; overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, white 15%, white 85%, transparent); mask: linear-gradient(90deg, transparent, white 15%, white 85%, transparent); }
 .scroller__inner { display: flex; gap: 20px; padding: 10px 0; width: max-content; animation: scroll 60s linear infinite; }
 @keyframes scroll { to { transform: translate(calc(-50% - 10px)); } }
+
 .cert-item { width: 220px; height: 160px; background-color: #1a1d21; border-radius: 12px; border: 1px solid #2d3436; padding: 10px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
 .cert-item:hover { transform: translateY(-5px); border-color: #e36049; }
 .cert-item img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
-</style> 
+</style>

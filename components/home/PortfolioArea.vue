@@ -26,7 +26,7 @@ const portfolio_data = [
     id: 3,
     img: portfolio_img_3,
     category: "Marketing",
-    title: "Brand Identity and Motion Design",
+    title: "Identidade de Marca e Design de Movimento",
   },
   {
     id: 4,
@@ -38,13 +38,13 @@ const portfolio_data = [
     id: 5,
     img: portfolio_img_5,
     category: "Design",
-    title: "Application Design",
+    title: "Design de Aplicações",
   },
   {
     id: 6,
     img: portfolio_img_6,
     category: "Branding",
-    title: "Website Development",
+    title: "Desenvolvimento do Site",
   },
 ];
 

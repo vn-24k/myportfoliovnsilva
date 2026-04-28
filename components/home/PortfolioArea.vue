@@ -102,9 +102,7 @@ function handleImagePopup(index) {
             <div class="section-title text-center wow fadeInUp delay-0-2s">
               <h2>Works & Projects</h2>
               <p>
-                Check out some of my design projects, meticulously crafted with
-                love and dedication, each one reflecting the passion and soul I
-                poured into every detail.
+                Arquiteturas otimizadas e inteligência aplicada. Meu foco é integrar modelos de IA cognitiva a sistemas full-stack de alto desempenho. Abaixo, compartilho projetos onde a performance, a latência e a inteligência foram os pilares de cada linha de código.
               </p>
             </div>
           </div>

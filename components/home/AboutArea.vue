@@ -5,61 +5,6 @@ onMounted(() => {
   const scroller = document.querySelector(".certifications-scroller");
   if (scroller) {
     const scrollerInner = scroller.querySelector(".scroller__inner");
-<script setup>
-import { onMounted } from 'vue';
-
-onMounted(() => {
-  const scroller = document.querySelector(".certifications-scroller");
-  if (scroller) {
-    const scrollerInner = scroller.querySelector(".scroller__inner");
-    const scrollerContent = Array.from(scrollerInner.children);
-    scrollerContent.forEach((item) => {
-      const duplicatedItem = item.cloneNode(true);
-      duplicatedItem.setAttribute("aria-hidden", true);
-      scrollerInner.appendChild(duplicatedItem);
-    });
-  }
-});
-
-const handleDownload = () => {
-  const link = document.createElement('a');
-  link.href = '/Vinicius_Caetano_CV.pdf';
-  link.setAttribute('download', 'Vinicius_Caetano_CV.pdf');
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-};
-</script>
-
-<template>
-  <section id="about" class="about-area">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="about-image-part wow fadeInUp delay-0-3s">
-            <img 
-              src="~/assets/images/about/profile.png" 
-              alt="Vinícius Silva" 
-              class="my-profile-custom-img" 
-            />
-            
-            <h2 class="display-name highlight-name">Vinícius Silva</h2>
-            <p>Engenheiro de Software Full Stack</p>
-            
-            <div class="about-social text-center centraliza-icones">
-              <ul>
-                <li><a href="https://linkedin.com/in/viniciussilva" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
-                <li><a href="https://github.com/vn-24k" target="_blank"><i class="ri-github-line"></i></a></li>
-              </ul>
-            </div>
-          </div>
-<script setup>
-import { onMounted } from 'vue';
-
-onMounted(() => {
-  const scroller = document.querySelector(".certifications-scroller");
-  if (scroller) {
-    const scrollerInner = scroller.querySelector(".scroller__inner");
     const scrollerContent = Array.from(scrollerInner.children);
     scrollerContent.forEach((item) => {
       const duplicatedItem = item.cloneNode(true);
@@ -107,7 +52,7 @@ const handleDownload = () => {
           <div class="about-content-part wow fadeInUp delay-0-2s">
             <p class="hello-text">Olá!</p>
             <h2 class="hero-description">
-              I'm <span class="highlight-name">Vinícius Silva</span>, um engenheiro movido pela curiosidade de desconstruir sistemas. Hoje, transformo essa lógica em soluções: construo backends robustos, pipelines de dados e agentes de IA autônomos. Python, LangChain e Cloud são minhas ferramentas para dar vida a produtos reais.
+              I'm <span class="highlight-name">Vinícius Silva</span>, um engenheiro movido a desconstruir sistemas. Hoje, crio backends robustos, pipelines de dados e agentes de IA autônomos. Uso Python, LangChain e Cloud para entregar produtos reais e escaláveis.
             </h2>
             <div class="adress-field">
               <ul>
@@ -143,7 +88,6 @@ const handleDownload = () => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
 
-/* Centralização dos Ícones */
 .centraliza-icones ul {
   display: flex !important;
   justify-content: center !important;
@@ -177,3 +121,4 @@ const handleDownload = () => {
 .cert-item:hover { transform: translateY(-5px); border-color: #e36049; }
 .cert-item img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
 </style>
+ 

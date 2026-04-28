@@ -3079,3 +3079,14 @@ body::before {
     );
     z-index: 9999; /* Fica acima de todo o conteúdo */
 }
+
+/* Isso força o estilo em TODAS as imagens profile.png do site, ignorando o tema */
+img[src*="profile.png"] {
+  width: 280px !important;
+  height: 280px !important;
+  object-fit: cover !important;
+  border-radius: 25px !important;
+  border: 2px solid #808080 !important;
+  box-shadow: 0 0 15px rgba(128, 128, 128, 0.6) !important;
+}
+

@@ -3088,7 +3088,6 @@ img[src*="profile.png"] {
   border: 2px solid #808080 !important;
   box-shadow: 0 0 15px rgba(128, 128, 128, 0.6) !important;
 }
-
 /* --- AJUSTE DE CENTRALIZAÇÃO DOS CERTIFICADOS --- */
 .cert-item {
   display: flex !important;           [span_2](start_span)[span_3](start_span)/* Ativa o alinhamento flexível[span_2](end_span)[span_3](end_span) */

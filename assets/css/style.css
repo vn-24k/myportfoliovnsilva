@@ -3088,3 +3088,25 @@ img[src*="profile.png"] {
   border: 2px solid #808080 !important;
   box-shadow: 0 0 15px rgba(128, 128, 128, 0.6) !important;
 }
+
+/* --- AJUSTE DE CENTRALIZAÇÃO DOS CERTIFICADOS --- */
+.cert-item {
+  display: flex !important;           [span_2](start_span)[span_3](start_span)/* Ativa o alinhamento flexível[span_2](end_span)[span_3](end_span) */
+  justify-content: center !important;  [span_4](start_span)[span_5](start_span)/* Centraliza na horizontal[span_4](end_span)[span_5](end_span) */
+  align-items: center !important;      [span_6](start_span)[span_7](start_span)/* Centraliza na vertical[span_6](end_span)[span_7](end_span) */
+  background-color: #1a1d21 !important; [span_8](start_span)[span_9](start_span)/* Mantém o fundo escuro[span_8](end_span)[span_9](end_span) */
+  width: 220px !important;            [span_10](start_span)/* Define a largura do quadrado[span_10](end_span) */
+  height: 160px !important;           [span_11](start_span)/* Define a altura do quadrado[span_11](end_span) */
+  border: 1px solid #2d3436 !important; [span_12](start_span)[span_13](start_span)/* Borda discreta[span_12](end_span)[span_13](end_span) */
+  padding: 10px !important;           [span_14](start_span)[span_15](start_span)/* Espaço interno para a imagem não colar na borda[span_14](end_span)[span_15](end_span) */
+  border-radius: 12px !important;     [span_16](start_span)[span_17](start_span)/* Cantos arredondados[span_16](end_span)[span_17](end_span) */
+  overflow: hidden !important;        [span_18](start_span)[span_19](start_span)/* Garante que nada saia do quadrado[span_18](end_span)[span_19](end_span) */
+}
+
+.cert-item img {
+  max-width: 100% !important;   [span_20](start_span)[span_21](start_span)/* Ajusta a largura da imagem ao quadrado[span_20](end_span)[span_21](end_span) */
+  max-height: 100% !important;  [span_22](start_span)/* Ajusta a altura da imagem ao quadrado[span_22](end_span) */
+  object-fit: contain !important; [span_23](start_span)/* Garante que o certificado apareça inteiro sem cortes[span_23](end_span) */
+  display: block !important;    [span_24](start_span)[span_25](start_span)/* Remove espaços extras abaixo da imagem[span_24](end_span)[span_25](end_span) */
+}
+

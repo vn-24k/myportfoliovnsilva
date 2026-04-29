@@ -7,12 +7,10 @@
         <div class="col-lg-12">
           <div class="call-to-action-part wow fadeInUp delay-0-2s text-center">
             <h2>
-              Are You Ready to kickstart your project with a touch of magic?
+              Software confiável, comunicação clara e entrega consistente.
             </h2>
             <p>
-              Reach out and {{"let's"}} make it happen ✨. {{"I'm"}} also available for
-              full-time or Part-time opportunities to push the boundaries of
-              design and deliver exceptional work.
+              Desenvolvimento Full Stack, automações e integrações para empresas que precisam de soluções bem executadas. ✨ 
             </p>
             <div class="hero-btns">
               <NuxtLink to="/contact" class="theme-btn"

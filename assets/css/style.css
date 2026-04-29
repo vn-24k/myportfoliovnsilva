@@ -1,4 +1,4 @@
-﻿/*
+r﻿/*
 * ----------------------------------------------------------------------------------------
 Author       : Hridoy
 Template Name: Bentos - Personal Portfolio HTML Template
@@ -3114,5 +3114,29 @@ img[src*="profile.png"] {
   max-height: 100% !important;
   object-fit: contain !important;
   display: block !important;
+    
+}
+/* --- ÚLTIMO BLOCO DO ARQUIVO --- */
+div.cert-item {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 220px !important;
+  height: 160px !important;
+  padding: 10px !important;
+  background-color: #1a1d21 !important;
+  border: 1px solid #2d3436 !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+div.cert-item img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto !important;
 }
 

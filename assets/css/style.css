@@ -3088,3 +3088,27 @@ img[src*="profile.png"] {
   border: 2px solid #808080 !important;
   box-shadow: 0 0 15px rgba(128, 128, 128, 0.6) !important;
 }
+/* --- CENTRALIZAÇÃO DOS CERTIFICADOS --- */
+.cert-item {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 220px !important;
+  height: 160px !important;
+  padding: 10px !important;
+  background-color: #121214 !important;
+  border: 1px solid rgba(119, 119, 125, 0.2) !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+.cert-item img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+-

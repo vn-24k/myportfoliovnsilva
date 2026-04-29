@@ -3108,3 +3108,11 @@ img[src*="profile.png"] {
   object-fit: contain !important;
   display: block !important;
 }
+/* Adicione logo abaixo do bloco que você acabou de corrigir */
+.cert-item img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+

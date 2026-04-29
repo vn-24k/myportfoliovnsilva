@@ -36,7 +36,7 @@ const handleDownload = () => {
               class="my-profile-custom-img" 
             />
             
-            <h2 class="display-name highlight-name">V.Caetano.</h2>
+            <h2 class="display-name highlight-name">Vinícius Silva</h2>
             <p>Engenheiro de Software Full Stack</p>
             
             <div class="about-social text-center centraliza-icones">
@@ -96,15 +96,25 @@ const handleDownload = () => {
   list-style: none !important;
 }
 
+/* ESTILO DA IMAGEM COM CORREÇÃO PARA O CLIQUE */
 .my-profile-custom-img {
   width: 280px !important;
   height: 280px !important;
   object-fit: cover !important;
   border-radius: 25px !important;
   border: 2px solid #808080 !important;
+  /* Brilho neon cinza base */
   box-shadow: 0 0 15px rgba(128, 128, 128, 0.6) !important;
-  display: block !important;
-  margin: 0 auto !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Quando passa o mouse OU clica na imagem */
+.my-profile-custom-img:hover, 
+.my-profile-custom-img:active, 
+.my-profile-custom-img:focus {
+  border-color: #b0b0b0 !important;
+  box-shadow: 0 0 25px rgba(180, 180, 180, 0.8), 0 0 45px rgba(180, 180, 180, 0.3) !important;
+  transform: scale(1.02);
 }
 
 .display-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 36px; color: #fff; margin-top: 20px; letter-spacing: -1px; }
@@ -121,4 +131,3 @@ const handleDownload = () => {
 .cert-item:hover { transform: translateY(-5px); border-color: #e36049; }
 .cert-item img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
 </style>
- 

@@ -1,4 +1,4 @@
-﻿/*
+/*
 * ----------------------------------------------------------------------------------------
 Author       : Hridoy
 Template Name: Bentos - Personal Portfolio HTML Template
@@ -34,8 +34,6 @@ Version      : 1.0
 * ----------------------------------------------------------------------------------------
 */
 
-@import url("https://fonts.googleapis.com");
-@import url("https://fonts.gstatic.com");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 
@@ -257,31 +255,11 @@ textarea::-ms-input-placeholder,
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
 }
 
-input::-webkit-input-placeholder,
-select::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder,
-.nice-select::-webkit-input-placeholder,
-.form-control::-webkit-input-placeholder {
-    color: var(--heading-color);
-    opacity: .4;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
-}
-
 input::-moz-placeholder,
 select::-moz-placeholder,
 textarea::-moz-placeholder,
 .nice-select::-moz-placeholder,
 .form-control::-moz-placeholder {
-    color: var(--heading-color);
-    opacity: .4;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
-}
-
-input:-ms-input-placeholder,
-select:-ms-input-placeholder,
-textarea:-ms-input-placeholder,
-.nice-select:-ms-input-placeholder,
-.form-control:-ms-input-placeholder {
     color: var(--heading-color);
     opacity: .4;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
@@ -1935,7 +1913,6 @@ ul.extra-skills li i {
 .pd-info-item h5 {
     color: var(--lighter-color);
     font-family: "Poppins", sans-serif;
-    y: "Syne", sans-serif;
 }
 
 
@@ -3087,4 +3064,27 @@ img[src*="profile.png"] {
   border-radius: 25px !important;
   border: 2px solid #808080 !important;
   box-shadow: 0 0 15px rgba(128, 128, 128, 0.6) !important;
+}
+/* --- CENTRALIZAÇÃO DOS CERTIFICADOS --- */
+.cert-item {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 220px !important;
+  height: 160px !important;
+  padding: 10px !important;
+  background-color: #121214 !important;
+  border: 1px solid rgba(119, 119, 125, 0.2) !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+.cert-item img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto !important;
 }

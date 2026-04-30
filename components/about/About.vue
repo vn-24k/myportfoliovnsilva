@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="about-image-part wow fadeInUp delay-0-3s">
-            <img src="~/assets/images/about/profile.png" alt="Vinícius Caetano da Silva" />
+            <img src="/images/profile.png" alt="Vinícius Caetano da Silva" />
           </div>
         </div>
         

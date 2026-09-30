@@ -2,6 +2,7 @@
 
 
 <script setup>
+import { ref } from "vue";
 import portfolio_img_1 from "~/assets/images/projects/work1.jpg";
 import portfolio_img_2 from "~/assets/images/projects/work2.jpg";
 import portfolio_img_3 from "~/assets/images/projects/work3.jpg";
@@ -74,7 +75,7 @@ const props = defineProps({
 })
 
 
-import { ref } from 'vue';
+
 import ImagePopup from '~/components/common/ImagePopup.vue';
 import 'vue-easy-lightbox/external-css/vue-easy-lightbox.css';
 
@@ -128,7 +129,7 @@ function handleImagePopup(index) {
           >
             <div class="project-item style-two wow fadeInUp delay-0-3s">
               <div class="project-image">
-                <img :src="item.img" alt="Project" />
+                <img :src="item.img" :alt="`Imagem de exibição do projeto: ${item.title}`"  />
                 <a style="cursor: pointer" @click.prevent="handleImagePopup(i)" class="details-btn"
                   ><i class="ri-arrow-right-up-line"></i
                 ></a>

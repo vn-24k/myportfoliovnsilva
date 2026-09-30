@@ -41,8 +41,8 @@ const handleDownload = () => {
             
             <div class="about-social text-center centraliza-icones">
               <ul>
-                <li><a href="https://linkedin.com/in/viniciussilva" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
-                <li><a href="https://github.com/vn-24k" target="_blank"><i class="ri-github-line"></i></a></li>
+                <li><a href="https://linkedin.com/in/viniciussilva" target="_blank" rel="noopener noreferrer"><i class="ri-linkedin-fill"></i></a></li>
+                <li><a href="https://github.com/vn-24k" target="_blank" rel="noopener noreferrer"><i class="ri-github-line"></i></a></li>
               </ul>
             </div>
           </div>
@@ -71,124 +71,12 @@ const handleDownload = () => {
             <div class="scroller-wrapper">
               <div class="certifications-scroller" data-speed="slow">
                 <div class="scroller__inner">
-                  <div class="cert-item"><img src="/IMG-20260422-WA0005(2).jpg" alt="Cert 1" /></div>
-                  <div class="cert-item"><img src="/IMG-20260422-WA0006(1).jpg" alt="Cert 2" /></div>
-                  <div class="cert-item"><img src="/IMG-20260422-WA0007(1).jpg" alt="Cert 3" /></div>
-                  <div class="cert-item"><img src="/IMG-20260422-WA0008(1).jpg" alt="Cert 4" /></div>
-                  <div class="cert-item"><img src="/IMG-20260422-WA0009(1).jpg" alt="Cert 5" /></div>
-                  <div class="cert-item"><img src="/IMG-20260427-WA0001.jpg" alt="Cert 6" /></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</template>
-
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
-
-.centraliza-icones ul {
-  display: flex !important;
-  justify-content: center !important;
-  gap: 20px !important;
-  padding: 0 !important;
-  list-style: none !important;
-}
-
-.my-profile-custom-img {
-  width: 280px !important;
-  height: 280px !important;
-  object-fit: cover !important;
-  border-radius: 25px !important;
-  border: 2px solid #808080 !important;
-  box-shadow: 0 0 15px rgba(128, 128, 128, 0.6) !important;
-  transition: all 0.3s ease !important;
-}
-
-.my-profile-custom-img:hover, 
-.my-profile-custom-img:active, 
-<script setup>
-import { onMounted } from 'vue';
-
-onMounted(() => {
-  const scroller = document.querySelector(".certifications-scroller");
-  if (scroller) {
-    const scrollerInner = scroller.querySelector(".scroller__inner");
-    const scrollerContent = Array.from(scrollerInner.children);
-    scrollerContent.forEach((item) => {
-      const duplicatedItem = item.cloneNode(true);
-      duplicatedItem.setAttribute("aria-hidden", true);
-      scrollerInner.appendChild(duplicatedItem);
-    });
-  }
-});
-
-const handleDownload = () => {
-  const link = document.createElement('a');
-  link.href = '/Vinicius_Caetano_CV.pdf';
-  link.setAttribute('download', 'Vinicius_Caetano_CV.pdf');
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-};
-</script>
-
-<template>
-  <section id="about" class="about-area">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="about-image-part wow fadeInUp delay-0-3s">
-            <img 
-              src="~/assets/images/about/profile.png" 
-              alt="Vinícius Silva" 
-              class="my-profile-custom-img" 
-            />
-            
-            <h2 class="display-name highlight-name">Vinícius Silva</h2>
-            <p>Engenheiro de Software Full Stack</p>
-            
-            <div class="about-social text-center centraliza-icones">
-              <ul>
-                <li><a href="https://linkedin.com/in/viniciussilva" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
-                <li><a href="https://github.com/vn-24k" target="_blank"><i class="ri-github-line"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-8">
-          <div class="about-content-part wow fadeInUp delay-0-2s">
-            <p class="hello-text">Olá!</p>
-            <h2 class="hero-description">
-              I'm <span class="highlight-name">Vinícius Silva</span>, um engenheiro movido a desconstruir sistemas. Hoje, crio backends robustos, pipelines de dados e agentes de IA autônomos. Uso Python, LangChain e Cloud para entregar produtos reais e escaláveis.
-            </h2>
-            <div class="adress-field">
-              <ul>
-                <li><i class="ri-circle-fill status-icon"></i>Disponível para trabalho freelancer</li>
-              </ul>
-            </div>
-            <div class="hero-btns">
-              <button @click="handleDownload" class="theme-btn download-btn">
-                Download CV <i class="ri-download-line"></i>
-              </button>
-            </div>
-          </div>
-
-          <div class="about-content-part-bottom wow fadeInUp delay-0-2s">
-            <h2 class="section-title">My Certifications & Training</h2>
-            <div class="scroller-wrapper">
-              <div class="certifications-scroller" data-speed="slow">
-                <div class="scroller__inner">
-                  <div class="cert-item"><img src="/IMG-20260422-WA0005(2).jpg" alt="Cert 1" /></div>
-                  <div class="cert-item"><img src="/IMG-20260422-WA0006(1).jpg" alt="Cert 2" /></div>
-                  <div class="cert-item"><img src="/IMG-20260422-WA0007(1).jpg" alt="Cert 3" /></div>
-                  <div class="cert-item"><img src="/IMG-20260422-WA0008(1).jpg" alt="Cert 4" /></div>
-                  <div class="cert-item"><img src="/IMG-20260422-WA0009(1).jpg" alt="Cert 5" /></div>
-                  <div class="cert-item"><img src="/IMG-20260427-WA0001.jpg" alt="Cert 6" /></div>
+                  <div class="cert-item"><img src="/IMG-20260422-WA0005(2).jpg" alt="Certificação ou Treinamento 1" /></div>
+                  <div class="cert-item"><img src="/IMG-20260422-WA0006(1).jpg" alt="Certificação ou Treinamento 2" /></div>
+                  <div class="cert-item"><img src="/IMG-20260422-WA0007(1).jpg" alt="Certificação ou Treinamento 3" /></div>
+                  <div class="cert-item"><img src="/IMG-20260422-WA0008(1).jpg" alt="Certificação ou Treinamento 4" /></div>
+                  <div class="cert-item"><img src="/IMG-20260422-WA0009(1).jpg" alt="Certificação ou Treinamento 5" /></div>
+                  <div class="cert-item"><img src="/IMG-20260427-WA0001.jpg" alt="Certificação ou Treinamento 6" /></div>
                 </div>
               </div>
             </div>

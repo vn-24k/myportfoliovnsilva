@@ -18,9 +18,6 @@ const toggleMenu = () => {
   openMenu.value = !openMenu.value
 }
 
-if (typeof window !== "undefined") {
-  import("bootstrap/dist/js/bootstrap");
-}
 </script>
 
 <template>

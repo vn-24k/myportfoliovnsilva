@@ -1,28 +1,78 @@
-
 <template>
   <section class="call-to-action-area">
     <div class="container">
       <div class="row">
-        <!-- START ABOUT TEXT DESIGN AREA -->
         <div class="col-lg-12">
           <div class="call-to-action-part wow fadeInUp delay-0-2s text-center">
             <h2>
-              Software confiável, comunicação clara e entrega consistente.
+              Software confiável, arquitetura limpa e entrega de alto impacto.
             </h2>
             <p>
-              Desenvolvimento Full Stack, automações e integrações para empresas que precisam de soluções bem executadas. ✨ 
+              Pronto para transformar requisitos complexos em sistemas escaláveis, agentes autônomos supervisionados e backends estáveis.
             </p>
             <div class="hero-btns">
-              <NuxtLink to="/contact" class="theme-btn"
-                >Let's Talk <i class="ri-download-line"></i
-              ></NuxtLink>
+              <NuxtLink to="/contact" class="theme-btn cta-btn">
+                Iniciar Conversa Técnica <i class="ri-chat-3-line"></i>
+              </NuxtLink>
             </div>
           </div>
         </div>
-        <!-- / END ABOUT TEXT DESIGN AREA -->
       </div>
     </div>
   </section>
 </template>
 
- 
+<style scoped>
+.call-to-action-area {
+  padding: 80px 0;
+  background: #0f1114;
+}
+
+.call-to-action-part {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 20px;
+  padding: 60px 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.call-to-action-part h2 {
+  font-size: 32px;
+  color: #ffffff;
+  font-weight: 800;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.call-to-action-part p {
+  color: #8b949e;
+  font-size: 16px;
+  max-width: 650px;
+  margin: 0 auto 30px auto;
+  line-height: 1.6;
+}
+
+.cta-btn {
+  background: #238636;
+  color: #ffffff !important;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.cta-btn:hover {
+  background: #2ea043;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .call-to-action-part h2 { font-size: 24px; }
+  .call-to-action-part { padding: 40px 20px; }
+}
+</style>

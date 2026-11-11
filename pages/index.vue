@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import Header from "~/layouts/Header.vue";
 import Footer from "~/layouts/Footer.vue";
 import CommonScrollTop from "~/components/common/ScrollTop.vue";
@@ -31,8 +31,8 @@ useHead({
   ]
 });
 
-// Estado Interativo da Stack Tecnológica: estritamente 1 tecnologia selecionada por vez
-const selectedSkill = ref('Python');
+// Estado Interativo da Stack Tecnológica: inicializa sem nada selecionado (desmarcado)
+const selectedSkill = ref(null);
 
 const skills = [
   {
@@ -118,13 +118,45 @@ const skills = [
 ];
 
 const currentSkill = computed(() => {
-  return skills.find(s => s.name === selectedSkill.value) || skills[0];
+  if (!selectedSkill.value) return null;
+  return skills.find(s => s.name === selectedSkill.value) || null;
 });
 
-// A seleção substitui imediatamente a anterior (seleção única estrita)
-const selectSkill = (skill) => {
-  selectedSkill.value = skill.name;
+// A seleção substitui imediatamente a anterior; clicar na mesma desmarca (toggle)
+const selectSkill = (skill, event) => {
+  if (event) {
+    event.stopPropagation();
+  }
+  selectedSkill.value = selectedSkill.value === skill.name ? null : skill.name;
 };
+
+// Clicar fora da stack desseleciona a tecnologia ativa
+const handleOutsideClick = (event) => {
+  if (!selectedSkill.value) return;
+  const target = event.target;
+  if (!target) return;
+  if (target.closest && (target.closest('.skill-item') || target.closest('.active-skill-spotlight'))) {
+    return;
+  }
+  selectedSkill.value = null;
+};
+
+// Tecla Escape também fecha a seleção
+const handleKeyDown = (event) => {
+  if (event.key === 'Escape' && selectedSkill.value) {
+    selectedSkill.value = null;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener('click', handleOutsideClick);
+  document.addEventListener('keydown', handleKeyDown);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleOutsideClick);
+  document.removeEventListener('keydown', handleKeyDown);
+});
 </script>
 
 <template>
@@ -152,11 +184,11 @@ const selectSkill = (skill) => {
             <div 
               class="skill-item" 
               :class="[skill.glowClass, { 'is-active': selectedSkill === skill.name }]"
-              @click="selectSkill(skill)"
+              @click="selectSkill(skill, $event)"
               tabindex="0"
               role="button"
               :aria-label="`Selecionar tecnologia ${skill.name}`"
-              @keyup.enter="selectSkill(skill)"
+              @keyup.enter="selectSkill(skill, $event)"
             >
               <div class="skill-icon">
                 <img :src="skill.icon" :alt="skill.name" loading="lazy" />
@@ -169,17 +201,19 @@ const selectSkill = (skill) => {
         </div>
 
         <!-- Banner Dinâmico em Destaque da Tecnologia Ativa -->
-        <div class="active-skill-spotlight" v-if="currentSkill">
-          <div class="spotlight-header">
-            <span 
-              class="spotlight-tag" 
-              :style="{ borderColor: currentSkill.color, color: currentSkill.color, background: `${currentSkill.color}15` }"
-            >
-              <i class="ri-flashlight-line"></i> {{ currentSkill.name }} • {{ currentSkill.tag }}
-            </span>
+        <Transition name="fade-slide">
+          <div class="active-skill-spotlight" v-if="currentSkill" @click.stop>
+            <div class="spotlight-header">
+              <span 
+                class="spotlight-tag" 
+                :style="{ borderColor: currentSkill.color, color: currentSkill.color, background: `${currentSkill.color}15` }"
+              >
+                <i class="ri-flashlight-line"></i> {{ currentSkill.name }} • {{ currentSkill.tag }}
+              </span>
+            </div>
+            <p class="spotlight-detail">{{ currentSkill.detail }}</p>
           </div>
-          <p class="spotlight-detail">{{ currentSkill.detail }}</p>
-        </div>
+        </Transition>
       </div>
     </section>
 
@@ -453,5 +487,17 @@ h5 {
   font-size: 14.5px;
   line-height: 1.55;
   margin: 0;
+}
+
+/* TRANSIÇÃO SUAVE PARA ENTRADA/SAÍDA DO SPOTLIGHT */
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
 }
 </style>

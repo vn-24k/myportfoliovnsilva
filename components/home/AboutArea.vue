@@ -3,8 +3,8 @@ import CertificationsGallery from './CertificationsGallery.vue';
 
 const handleDownload = () => {
   const link = document.createElement('a');
-  link.href = '/Vinicius_Caetano_CV.pdf';
-  link.setAttribute('download', 'Vinicius_Caetano_CV.pdf');
+  link.href = '/Curriculo_Vinicius_Caetano_Full_Stack.pdf';
+  link.setAttribute('download', 'Curriculo_Vinicius_Caetano_Full_Stack.pdf');
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

@@ -72,29 +72,33 @@ let isUserInteracting = false;
 let interactionTimeout = null;
 const scrollSpeed = 0.7; // pixels por frame (glide suave e contínuo)
 
-// Calcula a largura de um conjunto completo de 6 certificados
-const getSingleSetWidth = () => {
-  if (!marqueeTrackRef.value) return 0;
+// Cache da largura de 1 conjunto para evitar Forced Synchronous Reflow no loop
+let cachedSingleSetWidth = 0;
+
+const updateSingleSetWidth = () => {
+  if (!marqueeTrackRef.value) return;
   const cards = marqueeTrackRef.value.querySelectorAll('.cert-card-marquee');
-  if (cards.length < 6) return 0;
-  // Distância entre o início do card 0 e o card 6
-  return cards[6].offsetLeft - cards[0].offsetLeft;
+  if (cards.length >= 7) {
+    cachedSingleSetWidth = cards[6].offsetLeft - cards[0].offsetLeft;
+  }
 };
 
-// Loop contínuo com requestAnimationFrame
+const getSingleSetWidth = () => {
+  if (cachedSingleSetWidth > 0) return cachedSingleSetWidth;
+  updateSingleSetWidth();
+  return cachedSingleSetWidth;
+};
+
+// Loop contínuo com requestAnimationFrame ultra-otimizado (zero DOM queries)
 const autoScrollLoop = () => {
   if (marqueeContainerRef.value && !isAutoScrollPaused.value && !isUserInteracting) {
     marqueeContainerRef.value.scrollLeft += scrollSpeed;
 
-    const singleSetWidth = getSingleSetWidth();
-    if (singleSetWidth > 0) {
-      // Quando passar do 3º conjunto, rebobina suavemente 1 conjunto para trás (indetectável)
-      if (marqueeContainerRef.value.scrollLeft >= singleSetWidth * 3) {
-        marqueeContainerRef.value.scrollLeft -= singleSetWidth;
-      }
-      // Se rolar para trás e ficar abaixo do 1º conjunto, avança 1 conjunto
-      else if (marqueeContainerRef.value.scrollLeft <= singleSetWidth) {
-        marqueeContainerRef.value.scrollLeft += singleSetWidth;
+    if (cachedSingleSetWidth > 0) {
+      if (marqueeContainerRef.value.scrollLeft >= cachedSingleSetWidth * 3) {
+        marqueeContainerRef.value.scrollLeft -= cachedSingleSetWidth;
+      } else if (marqueeContainerRef.value.scrollLeft <= cachedSingleSetWidth) {
+        marqueeContainerRef.value.scrollLeft += cachedSingleSetWidth;
       }
     }
   }
@@ -367,18 +371,20 @@ const handleKeyDown = (e) => {
 onMounted(() => {
   nextTick(() => {
     if (marqueeContainerRef.value && marqueeTrackRef.value) {
-      // Inicia centralizado no conjunto central (índice 12)
+      updateSingleSetWidth();
       centerCardByIndex(12, false);
       rafId = requestAnimationFrame(autoScrollLoop);
     }
   });
   window.addEventListener('keydown', handleKeyDown);
+  window.addEventListener('resize', updateSingleSetWidth, { passive: true });
 });
 
 onUnmounted(() => {
   if (rafId) cancelAnimationFrame(rafId);
   if (interactionTimeout) clearTimeout(interactionTimeout);
   window.removeEventListener('keydown', handleKeyDown);
+  window.removeEventListener('resize', updateSingleSetWidth);
   document.body.style.overflow = '';
 });
 </script>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import Header from "~/layouts/Header.vue";
 import Footer from "~/layouts/Footer.vue";
 import CommonScrollTop from "~/components/common/ScrollTop.vue";
@@ -31,15 +31,7 @@ useHead({
   ]
 });
 
-// Efeito sutil de rastreamento do ponteiro
-onMounted(() => {
-  window.addEventListener("mousemove", (e) => {
-    document.body.style.setProperty("--mouse-x", `${e.clientX}px`);
-    document.body.style.setProperty("--mouse-y", `${e.clientY}px`);
-  });
-});
-
-// Estado Interativo da Stack Tecnológica
+// Estado Interativo da Stack Tecnológica: estritamente 1 tecnologia selecionada por vez
 const selectedSkill = ref('Python');
 
 const skills = [
@@ -129,6 +121,7 @@ const currentSkill = computed(() => {
   return skills.find(s => s.name === selectedSkill.value) || skills[0];
 });
 
+// A seleção substitui imediatamente a anterior (seleção única estrita)
 const selectSkill = (skill) => {
   selectedSkill.value = skill.name;
 };
@@ -141,7 +134,7 @@ const selectSkill = (skill) => {
     
     <HomeAboutArea />
 
-    <!-- Grid de Stacks & Tecnologias Super Interativa com Cores Vivas -->
+    <!-- Grid de Stacks & Tecnologias Ultra-Fluido e Otimizado -->
     <section class="hero-skills-area">
       <div class="container">
         <div class="skills-intro text-center">
@@ -210,23 +203,6 @@ const selectSkill = (skill) => {
   min-height: 100vh;
 }
 
-/* Efeito de brilho de alta performance */
-:global(body::before) {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  background: radial-gradient(
-    600px circle at var(--mouse-x, -100px) var(--mouse-y, -100px), 
-    rgba(88, 166, 255, 0.035), 
-    transparent 40%
-  );
-  z-index: 9999;
-}
-
 .hero-skills-area { 
   padding: 60px 0 45px 0; 
   background-color: #0d1117; 
@@ -276,14 +252,14 @@ const selectSkill = (skill) => {
   padding: 10px; 
 }
 
-/* CARD BASE DA TECNOLOGIA */
+/* CARD BASE DA TECNOLOGIA - ULTRA-LEVE & ACELERADO POR HARDWARE */
 .skill-item { 
   background: #141820; 
   border-radius: 16px; 
   padding: 24px 16px; 
   text-align: center; 
   border: 1px solid #2d333b; 
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease; 
   height: 100%;
   display: flex; 
   flex-direction: column; 
@@ -293,6 +269,15 @@ const selectSkill = (skill) => {
   position: relative;
   overflow: hidden;
   user-select: none;
+  will-change: transform;
+}
+
+/* Hover sutil apenas em desktop com mouse real (evita hover travado no touch mobile) */
+@media (hover: hover) {
+  .skill-item:hover:not(.is-active) {
+    border-color: #58a6ff;
+    transform: translateY(-3px);
+  }
 }
 
 .skill-icon img { 
@@ -300,7 +285,7 @@ const selectSkill = (skill) => {
   max-height: 52px;
   object-fit: contain;
   margin-bottom: 12px; 
-  transition: all 0.3s ease;
+  transition: transform 0.18s ease;
 }
 
 h5 { 
@@ -308,13 +293,13 @@ h5 {
   font-size: 15px; 
   margin: 0 0 4px 0; 
   font-weight: 700; 
-  transition: color 0.3s ease, text-shadow 0.3s ease;
+  transition: color 0.18s ease;
 }
 
 .skill-level {
   font-size: 11.5px;
   color: #8b949e;
-  transition: color 0.3s ease;
+  transition: color 0.18s ease;
 }
 
 .active-indicator {
@@ -325,172 +310,117 @@ h5 {
   height: 3px;
   border-radius: 3px 3px 0 0;
   background: currentColor;
-  box-shadow: 0 0 10px currentColor;
+  box-shadow: 0 0 8px currentColor;
 }
 
 /* ==============================================================
-   CORES VIVAS, FORTES E PODEROSAS (HOVER & CLICK ATIVO)
+   CORES VIVAS, FORTES E LUMINOSAS (EXCLUSIVO PARA .is-active)
+   Isso garante que apenas 1 card por vez fique selecionado!
    ============================================================== */
 
-/* PYTHON: Dourado Vivo & Azul Elétrico */
-.skill-item.glow-python:hover,
-.skill-item.glow-python.is-active { 
-  background: radial-gradient(circle at 50% 0%, rgba(56, 126, 184, 0.42) 0%, rgba(255, 212, 59, 0.25) 50%, #161b22 100%);
+.skill-item.is-active {
+  transform: translateY(-5px);
+}
+
+.skill-item.is-active .skill-icon img {
+  transform: scale(1.08);
+}
+
+/* PYTHON */
+.skill-item.is-active.glow-python { 
+  background: radial-gradient(circle at 50% 0%, rgba(56, 126, 184, 0.4) 0%, rgba(255, 212, 59, 0.22) 50%, #161b22 100%);
   border-color: #ffd43b; 
-  box-shadow: 0 0 35px rgba(255, 212, 59, 0.5), 0 0 15px rgba(56, 126, 184, 0.7), inset 0 0 20px rgba(255, 212, 59, 0.2); 
-  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 24px rgba(255, 212, 59, 0.45); 
 }
-.skill-item.glow-python:hover .skill-icon img,
-.skill-item.glow-python.is-active .skill-icon img {
-  filter: drop-shadow(0 0 16px rgba(255, 212, 59, 0.85));
-  transform: scale(1.12);
-}
-.skill-item.glow-python:hover h5,
-.skill-item.glow-python.is-active h5 {
+.skill-item.is-active.glow-python h5 {
   color: #ffd43b;
-  text-shadow: 0 0 14px rgba(255, 212, 59, 0.6);
+  text-shadow: 0 0 10px rgba(255, 212, 59, 0.5);
 }
-.skill-item.glow-python .active-indicator { color: #ffd43b; }
+.skill-item.is-active.glow-python .active-indicator { color: #ffd43b; }
 
-/* DOCKER: Ciano Elétrico Vívido */
-.skill-item.glow-docker:hover,
-.skill-item.glow-docker.is-active { 
-  background: radial-gradient(circle at 50% 0%, rgba(13, 183, 237, 0.45) 0%, rgba(8, 109, 215, 0.22) 55%, #161b22 100%);
+/* DOCKER */
+.skill-item.is-active.glow-docker { 
+  background: radial-gradient(circle at 50% 0%, rgba(13, 183, 237, 0.45) 0%, rgba(8, 109, 215, 0.2) 55%, #161b22 100%);
   border-color: #0db7ed; 
-  box-shadow: 0 0 35px rgba(13, 183, 237, 0.55), 0 0 15px rgba(13, 183, 237, 0.7), inset 0 0 20px rgba(13, 183, 237, 0.22); 
-  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 24px rgba(13, 183, 237, 0.45); 
 }
-.skill-item.glow-docker:hover .skill-icon img,
-.skill-item.glow-docker.is-active .skill-icon img {
-  filter: drop-shadow(0 0 16px rgba(13, 183, 237, 0.9));
-  transform: scale(1.12);
-}
-.skill-item.glow-docker:hover h5,
-.skill-item.glow-docker.is-active h5 {
+.skill-item.is-active.glow-docker h5 {
   color: #0db7ed;
-  text-shadow: 0 0 14px rgba(13, 183, 237, 0.6);
+  text-shadow: 0 0 10px rgba(13, 183, 237, 0.5);
 }
-.skill-item.glow-docker .active-indicator { color: #0db7ed; }
+.skill-item.is-active.glow-docker .active-indicator { color: #0db7ed; }
 
-/* AWS: Laranja / Âmbar Incandescente */
-.skill-item.glow-aws:hover,
-.skill-item.glow-aws.is-active { 
-  background: radial-gradient(circle at 50% 0%, rgba(255, 153, 0, 0.45) 0%, rgba(236, 114, 17, 0.22) 55%, #161b22 100%);
+/* AWS */
+.skill-item.is-active.glow-aws { 
+  background: radial-gradient(circle at 50% 0%, rgba(255, 153, 0, 0.45) 0%, rgba(236, 114, 17, 0.2) 55%, #161b22 100%);
   border-color: #ff9900; 
-  box-shadow: 0 0 35px rgba(255, 153, 0, 0.55), 0 0 15px rgba(255, 153, 0, 0.7), inset 0 0 20px rgba(255, 153, 0, 0.22); 
-  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 24px rgba(255, 153, 0, 0.45); 
 }
-.skill-item.glow-aws:hover .skill-icon img,
-.skill-item.glow-aws.is-active .skill-icon img {
-  filter: drop-shadow(0 0 16px rgba(255, 153, 0, 0.9));
-  transform: scale(1.12);
-}
-.skill-item.glow-aws:hover h5,
-.skill-item.glow-aws.is-active h5 {
+.skill-item.is-active.glow-aws h5 {
   color: #ff9900;
-  text-shadow: 0 0 14px rgba(255, 153, 0, 0.6);
+  text-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
 }
-.skill-item.glow-aws .active-indicator { color: #ff9900; }
+.skill-item.is-active.glow-aws .active-indicator { color: #ff9900; }
 
-/* NEXT.JS: Laser Branco Puro & Prata */
-.skill-item.glow-next:hover,
-.skill-item.glow-next.is-active { 
-  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.38) 0%, rgba(136, 136, 136, 0.2) 55%, #161b22 100%);
+/* NEXT.JS */
+.skill-item.is-active.glow-next { 
+  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.35) 0%, rgba(136, 136, 136, 0.2) 55%, #161b22 100%);
   border-color: #ffffff; 
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.45), 0 0 15px rgba(255, 255, 255, 0.65), inset 0 0 20px rgba(255, 255, 255, 0.2); 
-  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.4); 
 }
-.skill-item.glow-next:hover .skill-icon img,
-.skill-item.glow-next.is-active .skill-icon img {
-  filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.9));
-  transform: scale(1.12);
-}
-.skill-item.glow-next:hover h5,
-.skill-item.glow-next.is-active h5 {
+.skill-item.is-active.glow-next h5 {
   color: #ffffff;
-  text-shadow: 0 0 14px rgba(255, 255, 255, 0.6);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
-.skill-item.glow-next .active-indicator { color: #ffffff; }
+.skill-item.is-active.glow-next .active-indicator { color: #ffffff; }
 
-/* NODE.JS: Verde Esmeralda Radiante */
-.skill-item.glow-node:hover,
-.skill-item.glow-node.is-active { 
-  background: radial-gradient(circle at 50% 0%, rgba(108, 194, 74, 0.45) 0%, rgba(67, 133, 61, 0.22) 55%, #161b22 100%);
+/* NODE.JS */
+.skill-item.is-active.glow-node { 
+  background: radial-gradient(circle at 50% 0%, rgba(108, 194, 74, 0.45) 0%, rgba(67, 133, 61, 0.2) 55%, #161b22 100%);
   border-color: #6cc24a; 
-  box-shadow: 0 0 35px rgba(108, 194, 74, 0.55), 0 0 15px rgba(108, 194, 74, 0.7), inset 0 0 20px rgba(108, 194, 74, 0.22); 
-  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 24px rgba(108, 194, 74, 0.45); 
 }
-.skill-item.glow-node:hover .skill-icon img,
-.skill-item.glow-node.is-active .skill-icon img {
-  filter: drop-shadow(0 0 16px rgba(108, 194, 74, 0.9));
-  transform: scale(1.12);
-}
-.skill-item.glow-node:hover h5,
-.skill-item.glow-node.is-active h5 {
+.skill-item.is-active.glow-node h5 {
   color: #6cc24a;
-  text-shadow: 0 0 14px rgba(108, 194, 74, 0.6);
+  text-shadow: 0 0 10px rgba(108, 194, 74, 0.5);
 }
-.skill-item.glow-node .active-indicator { color: #6cc24a; }
+.skill-item.is-active.glow-node .active-indicator { color: #6cc24a; }
 
-/* TAILWIND: Azul Céu Neon */
-.skill-item.glow-tailwind:hover,
-.skill-item.glow-tailwind.is-active { 
-  background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.45) 0%, rgba(2, 132, 199, 0.22) 55%, #161b22 100%);
+/* TAILWIND */
+.skill-item.is-active.glow-tailwind { 
+  background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.45) 0%, rgba(2, 132, 199, 0.2) 55%, #161b22 100%);
   border-color: #38bdf8; 
-  box-shadow: 0 0 35px rgba(56, 189, 248, 0.55), 0 0 15px rgba(56, 189, 248, 0.7), inset 0 0 20px rgba(56, 189, 248, 0.22); 
-  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.45); 
 }
-.skill-item.glow-tailwind:hover .skill-icon img,
-.skill-item.glow-tailwind.is-active .skill-icon img {
-  filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.9));
-  transform: scale(1.12);
-}
-.skill-item.glow-tailwind:hover h5,
-.skill-item.glow-tailwind.is-active h5 {
+.skill-item.is-active.glow-tailwind h5 {
   color: #38bdf8;
-  text-shadow: 0 0 14px rgba(56, 189, 248, 0.6);
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
 }
-.skill-item.glow-tailwind .active-indicator { color: #38bdf8; }
+.skill-item.is-active.glow-tailwind .active-indicator { color: #38bdf8; }
 
-/* REACT 19: Ciano Neon Supercharged */
-.skill-item.glow-react:hover,
-.skill-item.glow-react.is-active { 
-  background: radial-gradient(circle at 50% 0%, rgba(0, 216, 255, 0.45) 0%, rgba(2, 132, 199, 0.22) 55%, #161b22 100%);
+/* REACT 19 */
+.skill-item.is-active.glow-react { 
+  background: radial-gradient(circle at 50% 0%, rgba(0, 216, 255, 0.45) 0%, rgba(2, 132, 199, 0.2) 55%, #161b22 100%);
   border-color: #00d8ff; 
-  box-shadow: 0 0 35px rgba(0, 216, 255, 0.55), 0 0 15px rgba(0, 216, 255, 0.7), inset 0 0 20px rgba(0, 216, 255, 0.22); 
-  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 24px rgba(0, 216, 255, 0.45); 
 }
-.skill-item.glow-react:hover .skill-icon img,
-.skill-item.glow-react.is-active .skill-icon img {
-  filter: drop-shadow(0 0 16px rgba(0, 216, 255, 0.9));
-  transform: scale(1.12);
-}
-.skill-item.glow-react:hover h5,
-.skill-item.glow-react.is-active h5 {
+.skill-item.is-active.glow-react h5 {
   color: #00d8ff;
-  text-shadow: 0 0 14px rgba(0, 216, 255, 0.6);
+  text-shadow: 0 0 10px rgba(0, 216, 255, 0.5);
 }
-.skill-item.glow-react .active-indicator { color: #00d8ff; }
+.skill-item.is-active.glow-react .active-indicator { color: #00d8ff; }
 
-/* POSTGRESQL: Safira & Esmeralda Radiante */
-.skill-item.glow-postgres:hover,
-.skill-item.glow-postgres.is-active { 
-  background: radial-gradient(circle at 50% 0%, rgba(62, 207, 142, 0.45) 0%, rgba(51, 103, 145, 0.25) 55%, #161b22 100%);
+/* POSTGRESQL */
+.skill-item.is-active.glow-postgres { 
+  background: radial-gradient(circle at 50% 0%, rgba(62, 207, 142, 0.45) 0%, rgba(51, 103, 145, 0.22) 55%, #161b22 100%);
   border-color: #3ecf8e; 
-  box-shadow: 0 0 35px rgba(62, 207, 142, 0.55), 0 0 15px rgba(62, 207, 142, 0.7), inset 0 0 20px rgba(62, 207, 142, 0.22); 
-  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 24px rgba(62, 207, 142, 0.45); 
 }
-.skill-item.glow-postgres:hover .skill-icon img,
-.skill-item.glow-postgres.is-active .skill-icon img {
-  filter: drop-shadow(0 0 16px rgba(62, 207, 142, 0.9));
-  transform: scale(1.12);
-}
-.skill-item.glow-postgres:hover h5,
-.skill-item.glow-postgres.is-active h5 {
+.skill-item.is-active.glow-postgres h5 {
   color: #3ecf8e;
-  text-shadow: 0 0 14px rgba(62, 207, 142, 0.6);
+  text-shadow: 0 0 10px rgba(62, 207, 142, 0.5);
 }
-.skill-item.glow-postgres .active-indicator { color: #3ecf8e; }
+.skill-item.is-active.glow-postgres .active-indicator { color: #3ecf8e; }
 
 /* BANNER DE DETALHE DA TECNOLOGIA EM DESTAQUE */
 .active-skill-spotlight {
@@ -502,8 +432,7 @@ h5 {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  transition: all 0.3s ease;
-  animation: fadeIn 0.3s ease-out;
+  transition: all 0.2s ease;
 }
 
 .spotlight-tag {
@@ -524,16 +453,5 @@ h5 {
   font-size: 14.5px;
   line-height: 1.55;
   margin: 0;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 </style>

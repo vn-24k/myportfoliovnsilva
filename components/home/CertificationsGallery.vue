@@ -70,7 +70,7 @@ const activeCenteredIndex = ref(12); // Centro no 3º conjunto (conjunto 2, índ
 let rafId = null;
 let isUserInteracting = false;
 let interactionTimeout = null;
-const scrollSpeed = 0.7; // pixels por frame (glide suave e contínuo)
+const scrollSpeed = 1.15; // pixels por frame (velocidade refinada e levemente acelerada)
 
 // Cache da largura de 1 conjunto para evitar Forced Synchronous Reflow no loop
 let cachedSingleSetWidth = 0;
@@ -725,9 +725,10 @@ onUnmounted(() => {
   align-items: center;
 }
 
-/* CARDS DOS CERTIFICADOS: PADRONIZADOS EM 16PX */
+/* CARDS DOS CERTIFICADOS: RIGOROSAMENTE PADRONIZADOS COM ALTURA E LARGURA IDÊNTICAS */
 .cert-card-marquee {
   width: 295px;
+  height: 335px; /* Altura idêntica em 100% dos cartões */
   background: #0d1117;
   border: 1px solid #2d333b;
   border-radius: 16px;
@@ -737,6 +738,7 @@ onUnmounted(() => {
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .cert-card-marquee:hover,
@@ -754,7 +756,8 @@ onUnmounted(() => {
 
 .cert-thumb-box {
   width: 100%;
-  height: 180px;
+  height: 175px;
+  flex-shrink: 0;
   background: #0d1117;
   position: relative;
   overflow: hidden;
@@ -803,10 +806,11 @@ onUnmounted(() => {
 }
 
 .cert-card-meta {
-  padding: 16px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  justify-content: space-between;
 }
 
 .cert-tag {
@@ -816,14 +820,23 @@ onUnmounted(() => {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 .cert-heading {
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 600;
   color: #f0f6fc;
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
   line-height: 1.35;
+  height: 40px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .cert-foot {
@@ -840,7 +853,11 @@ onUnmounted(() => {
 .cert-inst {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }
 
 .cert-yr {

@@ -127,31 +127,47 @@ const handleDownload = () => {
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
 
 .about-area {
-  padding-top: 20px;
+  padding-top: 170px;
+  padding-bottom: 120px;
+}
+
+@media (max-width: 991px) {
+  .about-area {
+    padding-top: 140px;
+    padding-bottom: 90px;
+  }
+}
+
+@media (max-width: 576px) {
+  .about-area {
+    padding-top: 120px;
+    padding-bottom: 70px;
+  }
 }
 
 .certs-section-row {
-  margin-top: 85px;
+  margin-top: 130px;
 }
 
 @media (max-width: 991px) {
   .certs-section-row {
-    margin-top: 60px;
+    margin-top: 95px;
   }
 }
 
 @media (max-width: 576px) {
   .certs-section-row {
-    margin-top: 45px;
+    margin-top: 75px;
   }
 }
 
 /* CARDS PRINCIPAIS: PADRONIZADOS EM 20PX COM PALETA GITHUB DARK */
 .about-image-part {
+  margin-top: 15px;
   background: #161b22;
   border: 1px solid #30363d;
   border-radius: 20px;
-  padding: 36px 24px;
+  padding: 42px 24px 38px 24px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -166,6 +182,7 @@ const handleDownload = () => {
 }
 
 .about-content-part {
+  margin-top: 15px;
   background: #161b22;
   border: 1px solid #30363d;
   border-radius: 20px;
@@ -179,14 +196,14 @@ const handleDownload = () => {
   border-color: rgba(88, 166, 255, 0.4);
 }
 
-/* AVATAR COM BORDA ARREDONDADA SUAVE & PROTEÇÃO CONTRA CORTES */
+/* AVATAR COM BORDA ARREDONDADA SUAVE & COR CINZA NEXT.JS */
 .profile-img-box {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 0 auto 18px auto;
-  padding: 6px;
+  margin: 10px auto 20px auto;
+  padding: 10px;
   box-sizing: border-box;
 }
 
@@ -196,8 +213,8 @@ const handleDownload = () => {
   max-width: 100%;
   border-radius: 24px;
   overflow: hidden;
-  border: 3px solid #58a6ff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 20px rgba(88, 166, 255, 0.25);
+  border: 3px solid #d0d7de; /* Cinza nobre e luminoso idêntico à stack Next.js */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 22px rgba(208, 215, 222, 0.35);
   background: #0d1117;
   transition: all 0.3s ease;
   display: block;
@@ -206,8 +223,8 @@ const handleDownload = () => {
 }
 
 .avatar-frame:hover {
-  border-color: #79c0ff;
-  box-shadow: 0 0 30px rgba(88, 166, 255, 0.5);
+  border-color: #ffffff;
+  box-shadow: 0 0 32px rgba(255, 255, 255, 0.55);
   transform: scale(1.02);
 }
 
@@ -215,7 +232,7 @@ const handleDownload = () => {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  object-position: center top !important;
+  object-position: center 6% !important;
   display: block !important;
   border-radius: 0 !important;
   border: none !important;

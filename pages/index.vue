@@ -238,7 +238,7 @@ onUnmounted(() => {
 }
 
 .hero-skills-area { 
-  padding: 60px 0 45px 0; 
+  padding: 95px 0 75px 0; 
   background-color: #0d1117; 
   border-top: 1px solid #21262d;
 }

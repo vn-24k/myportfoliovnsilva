@@ -50,7 +50,7 @@
 
 <style scoped>
 .metrics-section { 
-  padding: 40px 0; 
+  padding: 75px 0; 
   background: #0b0e14; 
 }
 

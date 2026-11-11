@@ -165,6 +165,11 @@ function handleImagePopup(index) {
 </template>
 
 <style scoped>
+.portfolio-area {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
 .sub-heading-badge {
   display: inline-flex;
   align-items: center;

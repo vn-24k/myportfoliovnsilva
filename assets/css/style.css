@@ -1249,19 +1249,19 @@ html {
 .about-image-part {
     text-align: center;
     padding: 40px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid #30363d;
     border-radius: 20px;
-    box-shadow: rgba(255, 255, 255, 0.025) 0px 0.362176px 0.651917px -1px inset, rgba(255, 255, 255, 0.036) 0px 3px 5.4px -2px inset;
-    background-color: #121214;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    background-color: #161b22;
 }
 
 .about-content-part,
 .about-content-part-bottom {
     padding: 40px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid #30363d;
     border-radius: 20px;
-    box-shadow: rgba(255, 255, 255, 0.025) 0px 0.362176px 0.651917px -1px inset, rgba(255, 255, 255, 0.036) 0px 3px 5.4px -2px inset;
-    background-color: #121214;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    background-color: #161b22;
 }
 
 .about-content-part-bottom {

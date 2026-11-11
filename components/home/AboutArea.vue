@@ -14,15 +14,21 @@ const handleDownload = () => {
 <template>
   <section id="about" class="about-area">
     <div class="container">
-      <div class="row">
+      <div class="row align-items-stretch">
         <!-- Coluna Esquerda: Cartão de Perfil -->
-        <div class="col-lg-4">
+        <div class="col-lg-4 mb-30 mb-lg-0">
           <div class="about-image-part wow fadeInUp delay-0-3s">
-            <img 
-              src="~/assets/images/about/profile.png" 
-              alt="Vinícius Silva" 
-              class="my-profile-custom-img" 
-            />
+            <div class="profile-img-box">
+              <img 
+                src="~/assets/images/about/profile.png" 
+                alt="Vinícius Silva" 
+                class="my-profile-custom-img" 
+              />
+              <span class="profile-online-badge" title="Disponível para Projetos">
+                <span class="badge-pulse"></span>
+                <span class="badge-core"></span>
+              </span>
+            </div>
             
             <h2 class="display-name highlight-name">Vinícius Silva</h2>
             <p class="role-subtitle">Engenheiro de Software Full Stack & Arquiteto de IA</p>
@@ -106,11 +112,13 @@ const handleDownload = () => {
               </NuxtLink>
             </div>
           </div>
+        </div>
+      </div>
 
-          <!-- Galeria de Certificados Contínua com Lightbox Pan & Zoom -->
-          <div class="about-content-part-bottom wow fadeInUp delay-0-2s">
-            <CertificationsGallery />
-          </div>
+      <!-- Linha Dedicada para Galeria de Certificados (12 Colunas) -->
+      <div class="row mt-35">
+        <div class="col-12">
+          <CertificationsGallery />
         </div>
       </div>
     </div>
@@ -120,45 +128,149 @@ const handleDownload = () => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
 
-.centraliza-icones ul {
-  display: flex !important;
-  justify-content: center !important;
-  gap: 20px !important;
-  padding: 0 !important;
-  list-style: none !important;
+.about-area {
+  padding-top: 20px;
+}
+
+.mt-35 {
+  margin-top: 35px;
+}
+
+/* CARDS PRINCIPAIS: PADRONIZADOS EM 20PX COM PALETA GITHUB DARK */
+.about-image-part {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 20px;
+  padding: 36px 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.about-image-part:hover {
+  border-color: rgba(88, 166, 255, 0.4);
+}
+
+.about-content-part {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 20px;
+  padding: 36px 36px;
+  height: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.25s ease;
+}
+
+.about-content-part:hover {
+  border-color: rgba(88, 166, 255, 0.4);
+}
+
+/* AVATAR COM SUTILEZA TECH E BORDA PADRONIZADA EM 20PX */
+.profile-img-box {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 8px;
 }
 
 .my-profile-custom-img {
-  width: 280px !important;
-  height: 280px !important;
+  width: 250px !important;
+  height: 250px !important;
   object-fit: cover !important;
-  border-radius: 25px !important;
-  border: 2px solid #808080 !important;
-  box-shadow: 0 0 15px rgba(128, 128, 128, 0.6) !important;
+  border-radius: 20px !important;
+  border: 2px solid #30363d !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
   transition: all 0.3s ease !important;
 }
 
-.my-profile-custom-img:hover, 
-.my-profile-custom-img:active, 
-.my-profile-custom-img:focus {
+.my-profile-custom-img:hover {
   border-color: #58a6ff !important;
-  box-shadow: 0 0 25px rgba(88, 166, 255, 0.5), 0 0 45px rgba(88, 166, 255, 0.2) !important;
+  box-shadow: 0 0 25px rgba(88, 166, 255, 0.4) !important;
   transform: scale(1.02);
+}
+
+.profile-online-badge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #3ecf8e;
+  opacity: 0.6;
+  animation: pulse 2s infinite ease-out;
+}
+
+.badge-core {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3ecf8e;
+  border: 2px solid #161b22;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.centraliza-icones ul {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  padding: 0 !important;
+  list-style: none !important;
+  margin: 16px 0 0 0 !important;
+}
+
+.centraliza-icones ul li a {
+  width: 42px;
+  height: 42px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  color: #c9d1d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.centraliza-icones ul li a:hover {
+  border-color: #58a6ff;
+  color: #58a6ff;
+  background: #1c2129;
+  transform: translateY(-2px);
 }
 
 .display-name { 
   font-family: 'Syne', sans-serif; 
   font-weight: 800; 
-  font-size: 36px; 
+  font-size: 32px; 
   color: #fff; 
-  margin-top: 20px; 
-  letter-spacing: -1px; 
+  margin-top: 18px; 
+  letter-spacing: -0.5px; 
 }
 
 .role-subtitle {
   color: #58a6ff;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14.5px;
   margin-top: 4px;
 }
 
@@ -175,7 +287,7 @@ const handleDownload = () => {
   gap: 8px;
   background: rgba(88, 166, 255, 0.1);
   border: 1px solid rgba(88, 166, 255, 0.25);
-  border-radius: 20px;
+  border-radius: 9999px;
   padding: 5px 14px;
   margin-bottom: 16px;
 }
@@ -206,13 +318,13 @@ const handleDownload = () => {
 }
 
 .hero-description-lead {
-  font-size: 17px;
+  font-size: 16.5px;
   line-height: 1.6;
   color: #b0b8c4;
   margin-bottom: 24px;
 }
 
-/* Grade de Competências Estruturadas */
+/* Grade de Competências: CARDS PADRONIZADOS EM 16PX */
 .hero-competency-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -224,30 +336,30 @@ const handleDownload = () => {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 12px;
-  padding: 12px 16px;
+  background: #0d1117;
+  border: 1px solid #21262d;
+  border-radius: 16px;
+  padding: 14px 18px;
   transition: all 0.25s ease;
 }
 
 .competency-card:hover {
   border-color: #58a6ff;
-  background: #1c2129;
+  background: #131821;
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
 .comp-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   background: rgba(88, 166, 255, 0.12);
   color: #58a6ff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 19px;
   flex-shrink: 0;
 }
 
@@ -258,19 +370,19 @@ const handleDownload = () => {
 
 .comp-title {
   color: #f0f6fc;
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 700;
   margin-bottom: 2px;
 }
 
 .comp-desc {
   color: #8b949e;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.35;
 }
 
 .hero-commitment {
-  font-size: 15px;
+  font-size: 14.5px;
   line-height: 1.5;
   color: #8b949e;
   border-left: 3px solid #58a6ff;
@@ -283,32 +395,72 @@ const handleDownload = () => {
   margin-right: 10px; 
 }
 
+/* BOTÕES DE AÇÃO: PADRONIZADOS EM 10PX COM ACABAMENTO MODERNO */
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 8px;
+}
+
 .download-btn { 
-  background-color: #e36049; 
-  border: none; 
+  background: #1f6feb; 
+  border: 1px solid rgba(88, 166, 255, 0.4); 
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 14px;
   cursor: pointer; 
-  color: #fff !important; 
+  color: #ffffff !important; 
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(31, 111, 235, 0.35);
+  transition: all 0.2s ease;
+}
+
+.download-btn:hover {
+  background: #388bfd;
+  box-shadow: 0 6px 20px rgba(88, 166, 255, 0.45);
+  transform: translateY(-2px);
 }
 
 .outline-btn { 
-  background: transparent; 
+  background: #0d1117; 
   border: 1px solid #30363d; 
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 14px;
   color: #f0f6fc !important; 
-  margin-left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
   transition: all 0.2s ease;
 }
 
 .outline-btn:hover {
-  background: #21262d;
+  background: #161b22;
   border-color: #58a6ff;
   color: #58a6ff !important;
+  transform: translateY(-2px);
 }
 
-.about-content-part-bottom { 
-  margin-top: 30px; 
+@media (max-width: 991px) {
+  .mb-lg-0 {
+    margin-bottom: 30px;
+  }
 }
 
 @media (max-width: 768px) {
+  .about-content-part {
+    padding: 28px 20px;
+  }
+  .about-image-part {
+    padding: 28px 20px;
+  }
   .hero-main-title {
     font-size: 24px;
   }
@@ -318,10 +470,14 @@ const handleDownload = () => {
   .hero-competency-grid {
     grid-template-columns: 1fr;
   }
+  .hero-btns {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .download-btn,
   .outline-btn {
-    margin-left: 0;
-    margin-top: 12px;
-    display: inline-block;
+    justify-content: center;
+    width: 100%;
   }
 }
 </style>

@@ -622,10 +622,17 @@ onUnmounted(() => {
 
 <style scoped>
 .certifications-gallery-wrapper {
-  margin-top: 50px;
-  padding-top: 40px;
-  border-top: 1px solid #23272d;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 20px;
+  padding: 36px 32px;
   position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.25s ease;
+}
+
+.certifications-gallery-wrapper:hover {
+  border-color: rgba(88, 166, 255, 0.4);
 }
 
 .gallery-header {
@@ -646,8 +653,8 @@ onUnmounted(() => {
   color: #3ecf8e;
   font-size: 13px;
   font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 20px;
+  padding: 4px 14px;
+  border-radius: 9999px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 10px;
@@ -674,10 +681,10 @@ onUnmounted(() => {
 }
 
 .ctrl-btn {
-  background: #161b22;
+  background: #0d1117;
   border: 1px solid #30363d;
   color: #c9d1d9;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 8px 14px;
   font-size: 13px;
   font-weight: 600;
@@ -725,12 +732,12 @@ onUnmounted(() => {
   align-items: center;
 }
 
-/* CARDS DOS CERTIFICADOS */
+/* CARDS DOS CERTIFICADOS: PADRONIZADOS EM 16PX */
 .cert-card-marquee {
   width: 295px;
-  background: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 14px;
+  background: #0d1117;
+  border: 1px solid #2d333b;
+  border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
   flex-shrink: 0;
@@ -749,7 +756,7 @@ onUnmounted(() => {
 
 .cert-card-marquee.is-centered {
   border-color: #3ecf8e;
-  box-shadow: 0 0 20px rgba(62, 207, 142, 0.22);
+  box-shadow: 0 0 20px rgba(62, 207, 142, 0.25);
 }
 
 .cert-thumb-box {
@@ -758,6 +765,7 @@ onUnmounted(() => {
   background: #0d1117;
   position: relative;
   overflow: hidden;
+  border-radius: 16px 16px 0 0;
 }
 
 .cert-thumb {

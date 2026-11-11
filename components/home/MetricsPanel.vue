@@ -60,9 +60,15 @@
   align-items: center;
   background: #161b22;
   border: 1px solid #30363d;
-  padding: 30px 40px; 
-  border-radius: 16px;
+  padding: 32px 40px; 
+  border-radius: 20px;
   gap: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.25s ease;
+}
+
+.metrics-wrapper:hover {
+  border-color: rgba(88, 166, 255, 0.4);
 }
 
 .metric-divider {

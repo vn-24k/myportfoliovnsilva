@@ -257,7 +257,7 @@ onUnmounted(() => {
   font-size: 13px;
   font-weight: 600;
   padding: 4px 14px;
-  border-radius: 20px;
+  border-radius: 9999px;
   text-transform: uppercase;
   margin-bottom: 12px;
   letter-spacing: 0.5px;
@@ -461,11 +461,12 @@ h5 {
   margin-top: 30px;
   background: #161b22;
   border: 1px solid #30363d;
-  border-radius: 14px;
-  padding: 18px 24px;
+  border-radius: 16px;
+  padding: 20px 26px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   transition: all 0.2s ease;
 }
 
@@ -475,8 +476,8 @@ h5 {
   gap: 6px;
   font-size: 13px;
   font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 20px;
+  padding: 4px 14px;
+  border-radius: 9999px;
   border: 1px solid;
   text-transform: uppercase;
   letter-spacing: 0.5px;

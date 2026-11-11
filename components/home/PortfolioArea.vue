@@ -175,12 +175,61 @@ function handleImagePopup(index) {
   font-size: 13px;
   font-weight: 600;
   padding: 4px 14px;
-  border-radius: 20px;
+  border-radius: 9999px;
   text-transform: uppercase;
   margin-bottom: 12px;
   letter-spacing: 0.5px;
 }
 
+/* FILTROS DE CATEGORIA COMO PÍLULAS INTERATIVAS ELEGANTES */
+.project-filter.filter-btns-one {
+  display: flex !important;
+  gap: 10px !important;
+  justify-content: center !important;
+  list-style: none !important;
+  padding: 0 0 30px 0 !important;
+  margin: 0 !important;
+  flex-wrap: wrap;
+}
+
+.project-filter.filter-btns-one li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.project-filter.filter-btns-one li a {
+  display: inline-flex !important;
+  align-items: center;
+  padding: 8px 18px !important;
+  border-radius: 9999px !important;
+  background: #161b22 !important;
+  border: 1px solid #30363d !important;
+  color: #8b949e !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.project-filter.filter-btns-one li a:after {
+  display: none !important;
+}
+
+.project-filter.filter-btns-one li a:hover {
+  color: #58a6ff !important;
+  border-color: #58a6ff !important;
+  background: #1c2129 !important;
+  transform: translateY(-2px);
+}
+
+.project-filter.filter-btns-one li a.current {
+  background: rgba(88, 166, 255, 0.15) !important;
+  border-color: #58a6ff !important;
+  color: #58a6ff !important;
+  box-shadow: 0 0 14px rgba(88, 166, 255, 0.25) !important;
+}
+
+/* CARDS DE PROJETOS PADRONIZADOS EM 16PX */
 .project-item.style-two {
   background: #161b22;
   border: 1px solid #30363d;
@@ -190,6 +239,8 @@ function handleImagePopup(index) {
   height: 100%;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  will-change: transform;
 }
 
 .project-item.style-two:hover {
@@ -204,6 +255,7 @@ function handleImagePopup(index) {
   height: 220px;
   overflow: hidden;
   background: #0d1117;
+  border-radius: 16px 16px 0 0;
 }
 
 .project-image img {
@@ -222,14 +274,15 @@ function handleImagePopup(index) {
   top: 14px;
   left: 14px;
   background: rgba(13, 17, 23, 0.85);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid #30363d;
   color: #3ecf8e;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   padding: 4px 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   letter-spacing: 0.5px;
 }
 
@@ -238,7 +291,8 @@ function handleImagePopup(index) {
   top: 14px;
   right: 14px;
   background: rgba(13, 17, 23, 0.85);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid #30363d;
   color: #f0f6fc;
   width: 36px;
@@ -305,7 +359,7 @@ function handleImagePopup(index) {
   font-size: 11px;
   font-family: monospace;
   padding: 6px 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   margin-bottom: 16px;
 }
 

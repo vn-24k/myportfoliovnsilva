@@ -179,34 +179,10 @@ const scrollTrack = (direction) => {
 
   centerCardByIndex(nextIdx, true);
 
-  // Retoma o auto-scroll após 3 segundos de inatividade se não estiver pausado manualmente
+  // Retoma o auto-scroll contínuo logo após centralizar (1.5s) se não estiver pausado manualmente
   interactionTimeout = setTimeout(() => {
     isUserInteracting = false;
-  }, 3200);
-};
-
-// Interação com o mouse (hover pausa o auto-scroll)
-const handleMouseEnter = () => {
-  isUserInteracting = true;
-};
-
-const handleMouseLeave = () => {
-  if (interactionTimeout) clearTimeout(interactionTimeout);
-  interactionTimeout = setTimeout(() => {
-    isUserInteracting = false;
-  }, 1200);
-};
-
-// Interação com touch (mobile)
-const handleTouchStart = () => {
-  isUserInteracting = true;
-};
-
-const handleTouchEnd = () => {
-  if (interactionTimeout) clearTimeout(interactionTimeout);
-  interactionTimeout = setTimeout(() => {
-    isUserInteracting = false;
-  }, 2500);
+  }, 1500);
 };
 
 // ==========================================
@@ -235,17 +211,22 @@ const resetZoomAndPan = () => {
   translateY.value = 0;
 };
 
+// Ao clicar em qualquer certificado: abre o visualizador e PAUSA a esteira
 const openLightbox = (index) => {
   currentIndex.value = index % certificates.length;
   resetZoomAndPan();
   isOpen.value = true;
+  isAutoScrollPaused.value = true;
   document.body.style.overflow = 'hidden';
 };
 
+// Ao fechar (ou clicar fora): RETOMA a esteira imediatamente
 const closeLightbox = () => {
   isOpen.value = false;
   resetZoomAndPan();
   document.body.style.overflow = '';
+  isAutoScrollPaused.value = false;
+  isUserInteracting = false;
 };
 
 const nextCertificate = () => {
@@ -368,6 +349,20 @@ const handleKeyDown = (e) => {
   if (e.key === '0' || e.key === 'r') resetZoomAndPan();
 };
 
+// Clicar fora da galeria retoma o movimento da esteira imediatamente
+const handleOutsideClick = (event) => {
+  const target = event.target;
+  if (!target) return;
+
+  // Se a esteira estiver pausada e o usuário clicar fora do painel de certificados, retoma
+  if (isAutoScrollPaused.value && !isOpen.value) {
+    if (!target.closest('.certifications-gallery-wrapper')) {
+      isAutoScrollPaused.value = false;
+      isUserInteracting = false;
+    }
+  }
+};
+
 onMounted(() => {
   nextTick(() => {
     if (marqueeContainerRef.value && marqueeTrackRef.value) {
@@ -378,6 +373,7 @@ onMounted(() => {
   });
   window.addEventListener('keydown', handleKeyDown);
   window.addEventListener('resize', updateSingleSetWidth, { passive: true });
+  document.addEventListener('click', handleOutsideClick);
 });
 
 onUnmounted(() => {
@@ -385,6 +381,7 @@ onUnmounted(() => {
   if (interactionTimeout) clearTimeout(interactionTimeout);
   window.removeEventListener('keydown', handleKeyDown);
   window.removeEventListener('resize', updateSingleSetWidth);
+  document.removeEventListener('click', handleOutsideClick);
   document.body.style.overflow = '';
 });
 </script>
@@ -436,10 +433,6 @@ onUnmounted(() => {
     <div 
       class="marquee-container"
       ref="marqueeContainerRef"
-      @mouseenter="handleMouseEnter"
-      @mouseleave="handleMouseLeave"
-      @touchstart="handleTouchStart"
-      @touchend="handleTouchEnd"
     >
       <div 
         class="marquee-track"

@@ -169,21 +169,28 @@ const handleDownload = () => {
   border-color: rgba(88, 166, 255, 0.4);
 }
 
-/* AVATAR COM SUTILEZA TECH E BORDA PADRONIZADA EM 20PX */
+/* AVATAR COM SUTILEZA TECH E SEM CORTAR A IMAGEM */
 .profile-img-box {
   position: relative;
-  display: inline-block;
-  margin-bottom: 8px;
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto 12px auto;
 }
 
 .my-profile-custom-img {
-  width: 250px !important;
-  height: 250px !important;
+  width: 100% !important;
+  max-width: 280px !important;
+  height: auto !important;
+  aspect-ratio: 926 / 1024 !important;
   object-fit: cover !important;
+  object-position: center top !important;
   border-radius: 20px !important;
   border: 2px solid #30363d !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
   transition: all 0.3s ease !important;
+  display: block;
+  margin: 0 auto;
 }
 
 .my-profile-custom-img:hover {
@@ -201,6 +208,7 @@ const handleDownload = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 
 .badge-pulse {

@@ -9,7 +9,7 @@ useHead({
   meta: [
     {
       name: "description",
-      content: "Portfólio de engenharia de software e arquitetura de IA de Vinícius Silva: AI Command Center, VNbaas, Neural Shell e aplicações corporativas."
+      content: "Portfólio de engenharia de software e arquitetura de IA de Vinícius Silva: AI Command Center, VNbaas e VNLinks em produção."
     }
   ]
 });

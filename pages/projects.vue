@@ -9,7 +9,7 @@ useHead({
   meta: [
     {
       name: "description",
-      content: "Portfólio de projetos reais de Vinícius Silva: AI Command Center (SaaS multi-tenant com Drizzle ORM e Better Auth), VNbaas (BaaS proprietário e Database Engine), Neural Shell CLI e sistemas em produção."
+      content: "Portfólio de projetos reais de Vinícius Silva: AI Command Center (SaaS multi-tenant com Drizzle ORM e Better Auth), VNbaas (BaaS proprietário e Database Engine com vetores) e VNLinks (hub estratégico interativo)."
     }
   ]
 });

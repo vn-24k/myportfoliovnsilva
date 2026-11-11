@@ -3,18 +3,15 @@ import { ref } from "vue";
 import portfolio_img_1 from "~/assets/images/projects/work1.jpg";
 import portfolio_img_2 from "~/assets/images/projects/work2.jpg";
 import portfolio_img_3 from "~/assets/images/projects/work3.jpg";
-import portfolio_img_4 from "~/assets/images/projects/work4.jpg";
-import portfolio_img_5 from "~/assets/images/projects/work5.jpg";
-import portfolio_img_6 from "~/assets/images/projects/work6.jpg";
 
 const portfolio_data = [
   {
     id: 1,
     img: portfolio_img_1,
     category: "IA & SaaS",
-    title: "AI Command Center — Orquestração & Governança",
-    desc: "Plataforma SaaS multi-tenant para supervisão de agentes de IA, histórico de tool calls, aprovação humana e faturamento automatizado.",
-    stack: "Next.js 15 • Drizzle ORM • Better Auth • Playwright",
+    title: "AI Command Center — Orquestração & Governança de Agentes",
+    desc: "Plataforma SaaS enterprise multi-tenant para supervisão de agentes autônomos de IA, histórico de tool calls, aprovação humana e faturamento automatizado.",
+    stack: "Next.js 15 • React 19 • Drizzle ORM • Better Auth • PostgreSQL",
     link: "/projects/ai-command-center",
     demo: "https://ai-command-center-silk.vercel.app",
     repo: "https://github.com/vn-24k/ai-command-center",
@@ -24,50 +21,16 @@ const portfolio_data = [
     id: 2,
     img: portfolio_img_2,
     category: "Backend & Dados",
-    title: "VNbaas — Backend-as-a-Service & Database Console",
-    desc: "Engine própria de BaaS com Console SQL interativo, busca semântica por vetores (Gemini SDK), Realtime WebSockets e Storage.",
-    stack: "React 19 • Node.js Express • PostgreSQL • Gemini",
+    title: "VNbaas — Backend-as-a-Service & Database Engine",
+    desc: "Engine própria de BaaS com Console SQL interativo, busca semântica vetorial com embeddings, Realtime WebSockets e gerenciamento de storage.",
+    stack: "React 19 • Node.js Express • PostgreSQL • Gemini SDK",
     link: "/projects/vnbaas",
     repo: "https://github.com/vn-24k/VnBaas",
     badge: "Engine Real"
   },
   {
     id: 3,
-    img: portfolio_img_4,
-    category: "Sistemas & DevOps",
-    title: "Neural Shell — CLI Autônoma de Engenharia",
-    desc: "Interface de linha de comando orientada a agentes de inteligência artificial para automação de tarefas de desenvolvimento e pipelines.",
-    stack: "Python • Automação • CLI • Linux Scripts",
-    link: "https://github.com/vn-24k/neural-shell",
-    repo: "https://github.com/vn-24k/neural-shell",
-    badge: "Open Source"
-  },
-  {
-    id: 4,
     img: portfolio_img_3,
-    category: "Sistemas & DevOps",
-    title: "Strata Engine — Telemetria de Computação Cognitiva",
-    desc: "Infraestrutura distribuída com telemetria reativa para monitoramento de nós de computação e integridade de cluster em tempo real.",
-    stack: "React 19 • Tailwind CSS v4 • Framer Motion",
-    link: "https://strata-engine-phi.vercel.app",
-    demo: "https://strata-engine-phi.vercel.app",
-    repo: "https://github.com/vn-24k/strata-engine",
-    badge: "Deploy Ativo"
-  },
-  {
-    id: 5,
-    img: portfolio_img_5,
-    category: "Backend & Dados",
-    title: "Media Vault — Gestão & Custódia de Ativos",
-    desc: "Arquitetura para custódia segura, catalogação indexada e processamento de fluxos de mídia digital em ambientes de alta disponibilidade.",
-    stack: "Backend • APIs • Storage • Segurança",
-    link: "https://github.com/vn-24k/media-vault",
-    repo: "https://github.com/vn-24k/media-vault",
-    badge: "Segurança"
-  },
-  {
-    id: 6,
-    img: portfolio_img_6,
     category: "Frontend & Web",
     title: "VNLinks — Plataforma Estratégica & Hub Interativo",
     desc: "Hub estratégico de apresentação profissional e links com console interativo de skills em tempo real, audio feedback e arquitetura responsiva.",
@@ -76,7 +39,7 @@ const portfolio_data = [
     demo: "https://vnlinks.vercel.app",
     repo: "https://github.com/vn-24k/bio-link-pro",
     badge: "Deploy Ativo"
-  },
+  }
 ];
 
 const categories = [

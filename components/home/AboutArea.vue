@@ -19,15 +19,13 @@ const handleDownload = () => {
         <div class="col-lg-4 mb-30 mb-lg-0">
           <div class="about-image-part wow fadeInUp delay-0-3s">
             <div class="profile-img-box">
-              <img 
-                src="~/assets/images/about/profile.png" 
-                alt="Vinícius Silva" 
-                class="my-profile-custom-img" 
-              />
-              <span class="profile-online-badge" title="Disponível para Projetos">
-                <span class="badge-pulse"></span>
-                <span class="badge-core"></span>
-              </span>
+              <div class="avatar-frame">
+                <img 
+                  src="~/assets/images/about/profile.png" 
+                  alt="Vinícius Silva" 
+                  class="my-profile-custom-img" 
+                />
+              </div>
             </div>
             
             <h2 class="display-name highlight-name">Vinícius Silva</h2>
@@ -116,7 +114,7 @@ const handleDownload = () => {
       </div>
 
       <!-- Linha Dedicada para Galeria de Certificados (12 Colunas) -->
-      <div class="row mt-35">
+      <div class="row certs-section-row">
         <div class="col-12">
           <CertificationsGallery />
         </div>
@@ -132,8 +130,20 @@ const handleDownload = () => {
   padding-top: 20px;
 }
 
-.mt-35 {
-  margin-top: 35px;
+.certs-section-row {
+  margin-top: 85px;
+}
+
+@media (max-width: 991px) {
+  .certs-section-row {
+    margin-top: 60px;
+  }
+}
+
+@media (max-width: 576px) {
+  .certs-section-row {
+    margin-top: 45px;
+  }
 }
 
 /* CARDS PRINCIPAIS: PADRONIZADOS EM 20PX COM PALETA GITHUB DARK */
@@ -169,71 +179,47 @@ const handleDownload = () => {
   border-color: rgba(88, 166, 255, 0.4);
 }
 
-/* AVATAR COM SUTILEZA TECH E SEM CORTAR A IMAGEM */
+/* AVATAR COM BORDA ARREDONDADA SUAVE & PROTEÇÃO CONTRA CORTES */
 .profile-img-box {
-  position: relative;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  max-width: 280px;
-  margin: 0 auto 12px auto;
+  margin: 0 auto 18px auto;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+.avatar-frame {
+  width: 250px;
+  height: 275px;
+  max-width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 3px solid #58a6ff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 20px rgba(88, 166, 255, 0.25);
+  background: #0d1117;
+  transition: all 0.3s ease;
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.avatar-frame:hover {
+  border-color: #79c0ff;
+  box-shadow: 0 0 30px rgba(88, 166, 255, 0.5);
+  transform: scale(1.02);
 }
 
 .my-profile-custom-img {
   width: 100% !important;
-  max-width: 280px !important;
-  height: auto !important;
-  aspect-ratio: 926 / 1024 !important;
+  height: 100% !important;
   object-fit: cover !important;
   object-position: center top !important;
-  border-radius: 20px !important;
-  border: 2px solid #30363d !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
-  transition: all 0.3s ease !important;
-  display: block;
-  margin: 0 auto;
-}
-
-.my-profile-custom-img:hover {
-  border-color: #58a6ff !important;
-  box-shadow: 0 0 25px rgba(88, 166, 255, 0.4) !important;
-  transform: scale(1.02);
-}
-
-.profile-online-badge {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  width: 14px;
-  height: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-
-.badge-pulse {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: #3ecf8e;
-  opacity: 0.6;
-  animation: pulse 2s infinite ease-out;
-}
-
-.badge-core {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #3ecf8e;
-  border: 2px solid #161b22;
-  position: relative;
-  z-index: 1;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 0.8; }
-  100% { transform: scale(2.2); opacity: 0; }
+  display: block !important;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .centraliza-icones ul {

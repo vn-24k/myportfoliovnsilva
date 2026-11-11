@@ -1273,7 +1273,8 @@ html {
 }
 
 .about-image-part img {
-    width: 300px;
+    max-width: 100%;
+    height: auto;
 }
 
 .about-image-part h2 {

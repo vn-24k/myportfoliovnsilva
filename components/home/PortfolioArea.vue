@@ -11,7 +11,7 @@ const portfolio_data = [
   {
     id: 1,
     img: portfolio_img_1,
-    category: "SaaS & IA",
+    category: "IA & SaaS",
     title: "AI Command Center — Orquestração & Governança",
     desc: "Plataforma SaaS multi-tenant para supervisão de agentes de IA, histórico de tool calls, aprovação humana e faturamento automatizado.",
     stack: "Next.js 15 • Drizzle ORM • Better Auth • Playwright",
@@ -23,10 +23,10 @@ const portfolio_data = [
   {
     id: 2,
     img: portfolio_img_2,
-    category: "BaaS & Dados",
+    category: "Backend & Dados",
     title: "VNbaas — Backend-as-a-Service & Database Console",
     desc: "Engine própria de BaaS com Console SQL interativo, busca semântica por vetores (Gemini SDK), Realtime WebSockets e Storage.",
-    stack: "React 19 • Node.js Express • PostgreSQL pg • Gemini",
+    stack: "React 19 • Node.js Express • PostgreSQL • Gemini",
     link: "/projects/vnbaas",
     repo: "https://github.com/vn-24k/VnBaas",
     badge: "Engine Real"
@@ -34,7 +34,7 @@ const portfolio_data = [
   {
     id: 3,
     img: portfolio_img_4,
-    category: "CLI & Automação",
+    category: "Sistemas & DevOps",
     title: "Neural Shell — CLI Autônoma de Engenharia",
     desc: "Interface de linha de comando orientada a agentes de inteligência artificial para automação de tarefas de desenvolvimento e pipelines.",
     stack: "Python • Automação • CLI • Linux Scripts",
@@ -45,9 +45,9 @@ const portfolio_data = [
   {
     id: 4,
     img: portfolio_img_3,
-    category: "Infraestrutura",
+    category: "Sistemas & DevOps",
     title: "Strata Engine — Telemetria de Computação Cognitiva",
-    desc: "Infraestrutura autônoma distribuída com telemetria reativa para monitoramento de nós de computação em tempo real.",
+    desc: "Infraestrutura distribuída com telemetria reativa para monitoramento de nós de computação e integridade de cluster em tempo real.",
     stack: "React 19 • Tailwind CSS v4 • Framer Motion",
     link: "https://strata-engine-phi.vercel.app",
     demo: "https://strata-engine-phi.vercel.app",
@@ -57,7 +57,7 @@ const portfolio_data = [
   {
     id: 5,
     img: portfolio_img_5,
-    category: "Cloud & Storage",
+    category: "Backend & Dados",
     title: "Media Vault — Gestão & Custódia de Ativos",
     desc: "Arquitetura para custódia segura, catalogação indexada e processamento de fluxos de mídia digital em ambientes de alta disponibilidade.",
     stack: "Backend • APIs • Storage • Segurança",
@@ -68,13 +68,14 @@ const portfolio_data = [
   {
     id: 6,
     img: portfolio_img_6,
-    category: "Conversão",
-    title: "BioLink Pro — Hub Estratégico de Conversão",
-    desc: "Plataforma estratégica de geração e rastreamento de páginas de alta conversão com métricas e performance ultrarrápida.",
-    stack: "Full Stack • Analytics • UI/UX",
-    link: "https://github.com/vn-24k/bio-link-pro",
+    category: "Frontend & Web",
+    title: "VNLinks — Plataforma Estratégica & Hub Interativo",
+    desc: "Hub estratégico de apresentação profissional e links com console interativo de skills em tempo real, audio feedback e arquitetura responsiva.",
+    stack: "React • TypeScript • Tailwind CSS • Vite",
+    link: "https://vnlinks.vercel.app",
+    demo: "https://vnlinks.vercel.app",
     repo: "https://github.com/vn-24k/bio-link-pro",
-    badge: "Analytics"
+    badge: "Deploy Ativo"
   },
 ];
 

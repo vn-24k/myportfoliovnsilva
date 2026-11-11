@@ -1,35 +1,35 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue';
 
 const certificates = [
   {
     id: 1,
     src: '/IMG-20260422-WA0005(2).jpg',
-    title: 'Certificação Técnica Especializada',
-    category: 'Engenharia de Software & Sistemas',
-    issuer: 'Programa de Capacitação Profissional',
+    title: 'Engenharia de Software & Sistemas',
+    category: 'Arquitetura & Engenharia',
+    issuer: 'Capacitação Profissional Especializada',
     year: '2026'
   },
   {
     id: 2,
     src: '/IMG-20260422-WA0006(1).jpg',
-    title: 'Arquitetura e Desenvolvimento Backend',
-    category: 'Backend, APIs & Banco de Dados',
-    issuer: 'Formação Avançada de Engenharia',
+    title: 'Desenvolvimento Backend & APIs REST',
+    category: 'Backend, APIs & Microserviços',
+    issuer: 'Formação Avançada em Engenharia',
     year: '2026'
   },
   {
     id: 3,
     src: '/IMG-20260422-WA0007(1).jpg',
     title: 'Inteligência Artificial & Agentes Autônomos',
-    category: 'IA Aplicada & Modelos Preditivos',
-    issuer: 'Certificação em Inteligência Computacional',
+    category: 'IA Aplicada & Engenharia de Prompts',
+    issuer: 'Inteligência Computacional & Automação',
     year: '2026'
   },
   {
     id: 4,
     src: '/IMG-20260422-WA0008(1).jpg',
-    title: 'Automação de Processos & Pipelines Digitais',
+    title: 'Pipelines Digitais & Automação Contínua',
     category: 'DevOps & Workflows de Escala',
     issuer: 'Treinamento Especializado em Automação',
     year: '2026'
@@ -37,36 +37,172 @@ const certificates = [
   {
     id: 5,
     src: '/IMG-20260422-WA0009(1).jpg',
-    title: 'Engenharia de Dados e Governança Relacional',
-    category: 'PostgreSQL, SQL Server & Estruturas de Dados',
+    title: 'Engenharia de Dados & Modelagem Relacional',
+    category: 'PostgreSQL, SQL Server & Estruturas',
     issuer: 'Capacitação em Modelagem de Sistemas',
     year: '2026'
   },
   {
     id: 6,
     src: '/IMG-20260427-WA0001.jpg',
-    title: 'Construção de Aplicações de Alto Desempenho',
-    category: 'Full Stack & Performance Computacional',
+    title: 'Aplicações Web de Alta Performance',
+    category: 'Full Stack & Otimização',
     issuer: 'Programa de Imersão Tecnológica',
     year: '2026'
   }
 ];
 
-// Lista duplicada para loop infinito contínuo e sem emendas
-const marqueeList = computed(() => [...certificates, ...certificates, ...certificates]);
+// 5 repetições para garantir esteira contínua infinita com wrap perfeito em ambas as direções
+const marqueeList = computed(() => [
+  ...certificates,
+  ...certificates,
+  ...certificates,
+  ...certificates,
+  ...certificates
+]);
 
-// Controle de Auto-Scroll
-const isAutoScrollPaused = ref(false);
+// Referências da esteira
+const marqueeContainerRef = ref(null);
 const marqueeTrackRef = ref(null);
+const isAutoScrollPaused = ref(false);
+const activeCenteredIndex = ref(12); // Centro no 3º conjunto (conjunto 2, índice 12)
 
-const toggleAutoScroll = () => {
-  isAutoScrollPaused.value = !isAutoScrollPaused.value;
+let rafId = null;
+let isUserInteracting = false;
+let interactionTimeout = null;
+const scrollSpeed = 0.7; // pixels por frame (glide suave e contínuo)
+
+// Calcula a largura de um conjunto completo de 6 certificados
+const getSingleSetWidth = () => {
+  if (!marqueeTrackRef.value) return 0;
+  const cards = marqueeTrackRef.value.querySelectorAll('.cert-card-marquee');
+  if (cards.length < 6) return 0;
+  // Distância entre o início do card 0 e o card 6
+  return cards[6].offsetLeft - cards[0].offsetLeft;
 };
 
+// Loop contínuo com requestAnimationFrame
+const autoScrollLoop = () => {
+  if (marqueeContainerRef.value && !isAutoScrollPaused.value && !isUserInteracting) {
+    marqueeContainerRef.value.scrollLeft += scrollSpeed;
+
+    const singleSetWidth = getSingleSetWidth();
+    if (singleSetWidth > 0) {
+      // Quando passar do 3º conjunto, rebobina suavemente 1 conjunto para trás (indetectável)
+      if (marqueeContainerRef.value.scrollLeft >= singleSetWidth * 3) {
+        marqueeContainerRef.value.scrollLeft -= singleSetWidth;
+      }
+      // Se rolar para trás e ficar abaixo do 1º conjunto, avança 1 conjunto
+      else if (marqueeContainerRef.value.scrollLeft <= singleSetWidth) {
+        marqueeContainerRef.value.scrollLeft += singleSetWidth;
+      }
+    }
+  }
+  rafId = requestAnimationFrame(autoScrollLoop);
+};
+
+// Pausar / Retomar com o botão
+const toggleAutoScroll = () => {
+  isAutoScrollPaused.value = !isAutoScrollPaused.value;
+  if (!isAutoScrollPaused.value) {
+    isUserInteracting = false;
+  }
+};
+
+// Encontra o card cujo centro está mais próximo do centro atual do container
+const getClosestCardIndex = () => {
+  if (!marqueeContainerRef.value || !marqueeTrackRef.value) return activeCenteredIndex.value;
+  const container = marqueeContainerRef.value;
+  const containerCenter = container.scrollLeft + (container.clientWidth / 2);
+  const cards = marqueeTrackRef.value.querySelectorAll('.cert-card-marquee');
+
+  let closestIdx = activeCenteredIndex.value;
+  let minDiff = Infinity;
+
+  cards.forEach((card, idx) => {
+    const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+    const diff = Math.abs(cardCenter - containerCenter);
+    if (diff < minDiff) {
+      minDiff = diff;
+      closestIdx = idx;
+    }
+  });
+
+  return closestIdx;
+};
+
+// Centraliza um card com precisão matemática na tela
+const centerCardByIndex = (targetIdx, smooth = true) => {
+  if (!marqueeContainerRef.value || !marqueeTrackRef.value) return;
+  const cards = marqueeTrackRef.value.querySelectorAll('.cert-card-marquee');
+  if (!cards || !cards[targetIdx]) return;
+
+  const card = cards[targetIdx];
+  const container = marqueeContainerRef.value;
+
+  // offsetLeft + (largura do card / 2) - (largura do container / 2)
+  const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+  const containerCenter = container.clientWidth / 2;
+  const targetScrollLeft = cardCenter - containerCenter;
+
+  container.scrollTo({
+    left: targetScrollLeft,
+    behavior: smooth ? 'smooth' : 'auto'
+  });
+
+  activeCenteredIndex.value = targetIdx;
+};
+
+// Navegação manual por setas (esquerda / direita) com centralização
 const scrollTrack = (direction) => {
-  if (!marqueeTrackRef.value) return;
-  const scrollAmount = direction === 'left' ? -320 : 320;
-  marqueeTrackRef.value.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  if (!marqueeContainerRef.value) return;
+
+  isUserInteracting = true;
+  if (interactionTimeout) clearTimeout(interactionTimeout);
+
+  const currentClosest = getClosestCardIndex();
+  const n = certificates.length; // 6
+  let nextIdx = direction === 'right' ? currentClosest + 1 : currentClosest - 1;
+
+  // Mantém os índices na faixa segura dos conjuntos centrais
+  if (nextIdx >= 4 * n) {
+    marqueeContainerRef.value.scrollLeft -= getSingleSetWidth();
+    nextIdx -= n;
+  } else if (nextIdx < n) {
+    marqueeContainerRef.value.scrollLeft += getSingleSetWidth();
+    nextIdx += n;
+  }
+
+  centerCardByIndex(nextIdx, true);
+
+  // Retoma o auto-scroll após 3 segundos de inatividade se não estiver pausado manualmente
+  interactionTimeout = setTimeout(() => {
+    isUserInteracting = false;
+  }, 3200);
+};
+
+// Interação com o mouse (hover pausa o auto-scroll)
+const handleMouseEnter = () => {
+  isUserInteracting = true;
+};
+
+const handleMouseLeave = () => {
+  if (interactionTimeout) clearTimeout(interactionTimeout);
+  interactionTimeout = setTimeout(() => {
+    isUserInteracting = false;
+  }, 1200);
+};
+
+// Interação com touch (mobile)
+const handleTouchStart = () => {
+  isUserInteracting = true;
+};
+
+const handleTouchEnd = () => {
+  if (interactionTimeout) clearTimeout(interactionTimeout);
+  interactionTimeout = setTimeout(() => {
+    isUserInteracting = false;
+  }, 2500);
 };
 
 // ==========================================
@@ -135,7 +271,7 @@ const zoomOut = () => {
   }
 };
 
-const toggleDoubleTapZoom = (e) => {
+const toggleDoubleTapZoom = () => {
   if (zoomScale.value > 1.05) {
     resetZoomAndPan();
   } else {
@@ -143,45 +279,44 @@ const toggleDoubleTapZoom = (e) => {
   }
 };
 
-// Roda do mouse para zoom
-const handleWheel = (e) => {
-  e.preventDefault();
-  if (e.deltaY < 0) {
-    zoomIn();
-  } else {
-    zoomOut();
-  }
-};
-
-// Arraste com Mouse (Pan)
-const startPan = (e) => {
+// Drag & Pan do Mouse
+const startDrag = (e) => {
   if (zoomScale.value <= 1.0) return;
   isDragging.value = true;
   startMouseX.value = e.clientX;
   startMouseY.value = e.clientY;
   startTranslateX.value = translateX.value;
   startTranslateY.value = translateY.value;
+  e.preventDefault();
 };
 
-const doPan = (e) => {
-  if (!isDragging.value || zoomScale.value <= 1.0) return;
+const onDrag = (e) => {
+  if (!isDragging.value) return;
   const deltaX = e.clientX - startMouseX.value;
   const deltaY = e.clientY - startMouseY.value;
-  
-  // Limites proporcionais ao nível de zoom
-  const maxPan = 350 * (zoomScale.value - 1);
-  translateX.value = Math.max(-maxPan, Math.min(maxPan, startTranslateX.value + deltaX));
-  translateY.value = Math.max(-maxPan, Math.min(maxPan, startTranslateY.value + deltaY));
+  translateX.value = startTranslateX.value + deltaX;
+  translateY.value = startTranslateY.value + deltaY;
 };
 
-const endPan = () => {
+const stopDrag = () => {
   isDragging.value = false;
 };
 
-// Gestos Touch (Mobile Pan e Pinch-to-zoom)
-const handleTouchStart = (e) => {
+// Zoom com a roda do mouse (Wheel)
+const handleWheel = (e) => {
+  e.preventDefault();
+  const delta = e.deltaY < 0 ? 0.2 : -0.2;
+  const newScale = Math.min(3.5, Math.max(1.0, +(zoomScale.value + delta).toFixed(2)));
+  zoomScale.value = newScale;
+  if (newScale === 1.0) {
+    translateX.value = 0;
+    translateY.value = 0;
+  }
+};
+
+// Gestos Touch Mobile: Pinch & Pan
+const handleTouchStartLightbox = (e) => {
   if (e.touches.length === 2) {
-    // Início de Pinch
     const dist = Math.hypot(
       e.touches[0].clientX - e.touches[1].clientX,
       e.touches[0].clientY - e.touches[1].clientY
@@ -189,7 +324,6 @@ const handleTouchStart = (e) => {
     initialPinchDistance.value = dist;
     initialPinchScale.value = zoomScale.value;
   } else if (e.touches.length === 1 && zoomScale.value > 1.0) {
-    // Início de Pan
     isDragging.value = true;
     startMouseX.value = e.touches[0].clientX;
     startMouseY.value = e.touches[0].clientY;
@@ -198,33 +332,28 @@ const handleTouchStart = (e) => {
   }
 };
 
-const handleTouchMove = (e) => {
-  if (e.touches.length === 2) {
-    e.preventDefault();
+const handleTouchMoveLightbox = (e) => {
+  if (e.touches.length === 2 && initialPinchDistance.value > 0) {
     const dist = Math.hypot(
       e.touches[0].clientX - e.touches[1].clientX,
       e.touches[0].clientY - e.touches[1].clientY
     );
-    if (initialPinchDistance.value > 0) {
-      const factor = dist / initialPinchDistance.value;
-      const newScale = Math.max(1.0, Math.min(3.5, +(initialPinchScale.value * factor).toFixed(2)));
-      zoomScale.value = newScale;
-    }
-  } else if (e.touches.length === 1 && isDragging.value && zoomScale.value > 1.0) {
+    const scaleFactor = dist / initialPinchDistance.value;
+    zoomScale.value = Math.min(3.5, Math.max(1.0, +(initialPinchScale.value * scaleFactor).toFixed(2)));
+  } else if (e.touches.length === 1 && isDragging.value) {
     const deltaX = e.touches[0].clientX - startMouseX.value;
     const deltaY = e.touches[0].clientY - startMouseY.value;
-    const maxPan = 350 * (zoomScale.value - 1);
-    translateX.value = Math.max(-maxPan, Math.min(maxPan, startTranslateX.value + deltaX));
-    translateY.value = Math.max(-maxPan, Math.min(maxPan, startTranslateY.value + deltaY));
+    translateX.value = startTranslateX.value + deltaX;
+    translateY.value = startTranslateY.value + deltaY;
   }
 };
 
-const handleTouchEnd = () => {
+const handleTouchEndLightbox = () => {
   isDragging.value = false;
   initialPinchDistance.value = 0;
 };
 
-// Teclado (Acessibilidade)
+// Teclado
 const handleKeyDown = (e) => {
   if (!isOpen.value) return;
   if (e.key === 'Escape') closeLightbox();
@@ -236,10 +365,19 @@ const handleKeyDown = (e) => {
 };
 
 onMounted(() => {
+  nextTick(() => {
+    if (marqueeContainerRef.value && marqueeTrackRef.value) {
+      // Inicia centralizado no conjunto central (índice 12)
+      centerCardByIndex(12, false);
+      rafId = requestAnimationFrame(autoScrollLoop);
+    }
+  });
   window.addEventListener('keydown', handleKeyDown);
 });
 
 onUnmounted(() => {
+  if (rafId) cancelAnimationFrame(rafId);
+  if (interactionTimeout) clearTimeout(interactionTimeout);
   window.removeEventListener('keydown', handleKeyDown);
   document.body.style.overflow = '';
 });
@@ -252,7 +390,7 @@ onUnmounted(() => {
       <div class="header-left">
         <span class="badge-tag"><i class="ri-shield-check-line"></i> Credenciais & Treinamentos</span>
         <h3 class="gallery-title">Certificações Profissionais</h3>
-        <p class="gallery-sub">Esteira em movimento contínuo. Passe o mouse ou toque para pausar e clique para ler em alta resolução com zoom dinâmico.</p>
+        <p class="gallery-sub">Esteira contínua e infinita. Use as setas para centralizar qualquer certificado e clique para leitura em alta definição com motor dinâmico de zoom e pan.</p>
       </div>
 
       <div class="header-controls">
@@ -260,7 +398,7 @@ onUnmounted(() => {
           type="button" 
           class="ctrl-btn" 
           @click="toggleAutoScroll" 
-          :title="isAutoScrollPaused ? 'Retomar movimento automático' : 'Pausar movimento automático'"
+          :title="isAutoScrollPaused ? 'Retomar movimento contínuo' : 'Pausar movimento contínuo'"
           aria-label="Pausar ou retomar animação"
         >
           <i :class="isAutoScrollPaused ? 'ri-play-fill' : 'ri-pause-line'"></i>
@@ -271,8 +409,8 @@ onUnmounted(() => {
           type="button" 
           class="ctrl-btn arrow-ctrl" 
           @click="scrollTrack('left')" 
-          title="Rolar para esquerda"
-          aria-label="Rolar para esquerda"
+          title="Centralizar certificado anterior"
+          aria-label="Centralizar certificado anterior"
         >
           <i class="ri-arrow-left-s-line"></i>
         </button>
@@ -280,31 +418,32 @@ onUnmounted(() => {
           type="button" 
           class="ctrl-btn arrow-ctrl" 
           @click="scrollTrack('right')" 
-          title="Rolar para direita"
-          aria-label="Rolar para direita"
+          title="Centralizar próximo certificado"
+          aria-label="Centralizar próximo certificado"
         >
           <i class="ri-arrow-right-s-line"></i>
         </button>
       </div>
     </div>
 
-    <!-- ESTEIRA EM MOVIMENTO CONTÍNUO (AUTO-SCROLL SUAVE) -->
+    <!-- ESTEIRA EM MOVIMENTO CONTÍNUO E INFINITO -->
     <div 
       class="marquee-container"
-      ref="marqueeTrackRef"
-      @mouseenter="isAutoScrollPaused = true"
-      @mouseleave="isAutoScrollPaused = false"
-      @touchstart="isAutoScrollPaused = true"
-      @touchend="isAutoScrollPaused = false"
+      ref="marqueeContainerRef"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
+      @touchstart="handleTouchStart"
+      @touchend="handleTouchEnd"
     >
       <div 
         class="marquee-track"
-        :class="{ 'is-paused': isAutoScrollPaused }"
+        ref="marqueeTrackRef"
       >
         <div 
           v-for="(cert, index) in marqueeList" 
           :key="`${cert.id}-${index}`"
           class="cert-card-marquee"
+          :class="{ 'is-centered': activeCenteredIndex === index }"
           @click="openLightbox(index % certificates.length)"
           tabindex="0"
           role="button"
@@ -362,31 +501,27 @@ onUnmounted(() => {
                 type="button" 
                 class="tool-btn" 
                 @click="zoomOut" 
-                title="Diminuir Zoom (-)" 
+                title="Diminuir Zoom (-)"
                 :disabled="zoomScale <= 1.0"
-                aria-label="Diminuir Zoom"
               >
                 <i class="ri-zoom-out-line"></i>
               </button>
-
+              
               <button 
                 type="button" 
                 class="tool-btn reset-btn" 
                 @click="resetZoomAndPan" 
-                title="Redefinir Zoom (100%)"
-                aria-label="Redefinir Zoom"
+                title="Redefinir escala (100%)"
               >
-                <i class="ri-refresh-line"></i>
-                <span class="tool-label">100%</span>
+                100% Redefinir
               </button>
 
               <button 
                 type="button" 
                 class="tool-btn" 
                 @click="zoomIn" 
-                title="Aumentar Zoom (+)" 
+                title="Aumentar Zoom (+)"
                 :disabled="zoomScale >= 3.5"
-                aria-label="Aumentar Zoom"
               >
                 <i class="ri-zoom-in-line"></i>
               </button>
@@ -395,96 +530,83 @@ onUnmounted(() => {
             <div class="topbar-right">
               <button 
                 type="button" 
-                class="lightbox-close-btn" 
-                @click="closeLightbox"
-                aria-label="Fechar visualização"
+                class="close-btn" 
+                @click="closeLightbox" 
+                title="Fechar (Esc)"
+                aria-label="Fechar visualizador"
               >
                 <i class="ri-close-line"></i>
-                <span class="btn-text">Fechar (ESC)</span>
               </button>
             </div>
           </div>
 
-          <!-- Botões Laterais de Navegação -->
-          <button 
-            type="button" 
-            class="nav-arrow-btn prev-arrow" 
-            @click.stop="prevCertificate"
-            aria-label="Certificado anterior"
-          >
-            <i class="ri-arrow-left-s-line"></i>
-          </button>
-
-          <!-- Palco Central com Visualização Interativa Pan & Zoom -->
+          <!-- Palco Central com Suporte a Drag, Wheel, Pinch e Double-tap -->
           <div 
-            class="lightbox-stage" 
-            @click.self="closeLightbox"
+            class="lightbox-viewport"
+            :class="{ 'is-zoomed': zoomScale > 1.0, 'is-dragging': isDragging }"
+            @mousedown="startDrag"
+            @mousemove="onDrag"
+            @mouseup="stopDrag"
+            @mouseleave="stopDrag"
             @wheel="handleWheel"
-            @mousedown="startPan"
-            @mousemove="doPan"
-            @mouseup="endPan"
-            @mouseleave="endPan"
-            @touchstart="handleTouchStart"
-            @touchmove="handleTouchMove"
-            @touchend="handleTouchEnd"
+            @dblclick="toggleDoubleTapZoom"
+            @touchstart="handleTouchStartLightbox"
+            @touchmove="handleTouchMoveLightbox"
+            @touchend="handleTouchEndLightbox"
           >
             <div 
-              class="zoom-canvas"
-              :class="{ 'is-zoomed': zoomScale > 1.0, 'is-dragging': isDragging }"
-              @dblclick="toggleDoubleTapZoom"
+              class="image-transform-wrapper"
+              :style="{
+                transform: `translate3d(${translateX}px, ${translateY}px, 0px) scale(${zoomScale})`,
+                transition: isDragging ? 'none' : 'transform 0.22s ease-out'
+              }"
             >
               <img 
                 :src="certificates[currentIndex].src" 
                 :alt="certificates[currentIndex].title"
-                class="zoomable-image"
-                :style="{
-                  transform: `translate(${translateX}px, ${translateY}px) scale(${zoomScale})`,
-                  cursor: zoomScale > 1.0 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-in'
-                }"
+                class="lightbox-image"
                 draggable="false"
               />
             </div>
 
-            <!-- Dica Flutuante de Interação -->
-            <div class="interactive-hint">
-              <span v-if="zoomScale > 1.0">
-                <i class="ri-hand"></i> Clique e arraste para explorar os detalhes • Duplo clique para redefinir
-              </span>
-              <span v-else>
-                <i class="ri-search-eye-line"></i> Duplo clique ou use a roda do mouse para ampliar o texto
-              </span>
-            </div>
+            <!-- Setas Flutuantes de Navegação entre Certificados -->
+            <button 
+              type="button" 
+              class="nav-btn prev-btn" 
+              @click.stop="prevCertificate"
+              title="Certificado anterior (Seta esquerda)"
+              aria-label="Certificado anterior"
+            >
+              <i class="ri-arrow-left-s-line"></i>
+            </button>
 
-            <!-- Legenda Contextual -->
-            <div class="lightbox-caption">
-              <h4>{{ certificates[currentIndex].title }}</h4>
-              <p>{{ certificates[currentIndex].category }} • {{ certificates[currentIndex].issuer }} ({{ certificates[currentIndex].year }})</p>
-            </div>
+            <button 
+              type="button" 
+              class="nav-btn next-btn" 
+              @click.stop="nextCertificate"
+              title="Próximo certificado (Seta direita)"
+              aria-label="Próximo certificado"
+            >
+              <i class="ri-arrow-right-s-line"></i>
+            </button>
           </div>
 
-          <!-- Botão Próximo -->
-          <button 
-            type="button" 
-            class="nav-arrow-btn next-arrow" 
-            @click.stop="nextCertificate"
-            aria-label="Próximo certificado"
-          >
-            <i class="ri-arrow-right-s-line"></i>
-          </button>
-
-          <!-- Barra Inferior Mobile -->
-          <div class="lightbox-mobile-footer">
-            <button class="m-btn" @click.stop="prevCertificate">
-              <i class="ri-arrow-left-line"></i> Anterior
-            </button>
-            <div class="m-zoom-actions">
-              <button class="m-btn zoom-m-btn" @click.stop="zoomOut" :disabled="zoomScale <= 1.0"><i class="ri-subtract-line"></i></button>
-              <button class="m-btn zoom-m-btn" @click.stop="resetZoomAndPan"><i class="ri-refresh-line"></i></button>
-              <button class="m-btn zoom-m-btn" @click.stop="zoomIn" :disabled="zoomScale >= 3.5"><i class="ri-add-line"></i></button>
+          <!-- Rodapé de Informações Técnicas e Legenda -->
+          <div class="lightbox-footer">
+            <div class="footer-info">
+              <span class="footer-category">{{ certificates[currentIndex].category }}</span>
+              <h4 class="footer-title">{{ certificates[currentIndex].title }}</h4>
+              <p class="footer-issuer">
+                <i class="ri-award-line"></i> Emitido por {{ certificates[currentIndex].issuer }} • {{ certificates[currentIndex].year }}
+              </p>
             </div>
-            <button class="m-btn" @click.stop="nextCertificate">
-              Próximo <i class="ri-arrow-right-line"></i>
-            </button>
+            <div class="footer-hint">
+              <span><i class="ri-mouse-line"></i> Roda do mouse amplia</span>
+              <span class="sep">•</span>
+              <span><i class="ri-drag-move-2-line"></i> Arraste para mover</span>
+              <span class="sep">•</span>
+              <span><i class="ri-smartphone-line"></i> Pinça ou toque duplo no celular</span>
+            </div>
           </div>
         </div>
       </Transition>
@@ -495,8 +617,8 @@ onUnmounted(() => {
 <style scoped>
 .certifications-gallery-wrapper {
   margin-top: 50px;
-  border-top: 1px solid #23272d;
   padding-top: 40px;
+  border-top: 1px solid #23272d;
   position: relative;
 }
 
@@ -513,28 +635,28 @@ onUnmounted(() => {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #3ecf8e;
   background: rgba(62, 207, 142, 0.1);
   border: 1px solid rgba(62, 207, 142, 0.25);
+  color: #3ecf8e;
+  font-size: 13px;
+  font-weight: 600;
   padding: 4px 12px;
   border-radius: 20px;
-  margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin-bottom: 10px;
 }
 
 .gallery-title {
-  color: #ffffff;
   font-size: 24px;
   font-weight: 700;
+  color: #ffffff;
   margin: 0 0 6px 0;
 }
 
 .gallery-sub {
-  color: #8b949e;
   font-size: 14px;
+  color: #8b949e;
   margin: 0;
   max-width: 650px;
 }
@@ -549,14 +671,14 @@ onUnmounted(() => {
   background: #161b22;
   border: 1px solid #30363d;
   color: #c9d1d9;
-  padding: 8px 14px;
   border-radius: 8px;
+  padding: 8px 14px;
   font-size: 13px;
   font-weight: 600;
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  cursor: pointer;
   transition: all 0.2s ease;
 }
 
@@ -567,71 +689,68 @@ onUnmounted(() => {
 }
 
 .arrow-ctrl {
-  padding: 8px 10px;
+  padding: 8px 12px;
   font-size: 18px;
 }
 
-/* =========================================
-   ESTEIRA HORIZONTAL EM MOVIMENTO CONTÍNUO
-   ========================================= */
+/* CONTAINER DA ESTEIRA: NATIVE HORIZONTAL SCROLL COM RAF CONTINUO */
 .marquee-container {
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto;
   position: relative;
-  padding: 10px 0;
-  -webkit-mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
-  mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  padding: 18px 0;
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,1) 4%, rgba(0,0,0,1) 96%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,1) 4%, rgba(0,0,0,1) 96%, transparent 100%);
+}
+
+.marquee-container::-webkit-scrollbar {
+  display: none;
 }
 
 .marquee-track {
   display: flex;
   gap: 22px;
   width: max-content;
-  animation: marqueeLoop 40s linear infinite;
-  will-change: transform;
+  align-items: center;
 }
 
-.marquee-track:hover,
-.marquee-track.is-paused {
-  animation-play-state: paused;
-}
-
-@keyframes marqueeLoop {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    /* Desloca 1/3 da lista para loop perfeitamente contínuo */
-    transform: translateX(calc(-100% / 3));
-  }
-}
-
+/* CARDS DOS CERTIFICADOS */
 .cert-card-marquee {
-  width: 290px;
+  width: 295px;
   background: #161b22;
   border: 1px solid #30363d;
   border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.25s ease;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
 }
 
-.cert-card-marquee:hover, 
+.cert-card-marquee:hover,
 .cert-card-marquee:focus {
-  transform: translateY(-5px);
   border-color: #58a6ff;
+  transform: translateY(-4px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
   outline: none;
 }
 
+.cert-card-marquee.is-centered {
+  border-color: #3ecf8e;
+  box-shadow: 0 0 20px rgba(62, 207, 142, 0.22);
+}
+
 .cert-thumb-box {
-  position: relative;
   width: 100%;
   height: 180px;
   background: #0d1117;
+  position: relative;
   overflow: hidden;
 }
 
@@ -664,15 +783,15 @@ onUnmounted(() => {
 }
 
 .zoom-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: #238636;
   color: #ffffff;
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 13px;
   font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
   box-shadow: 0 4px 12px rgba(35, 134, 54, 0.4);
 }
 
@@ -685,30 +804,30 @@ onUnmounted(() => {
 
 .cert-tag {
   font-size: 11px;
+  font-weight: 600;
   color: #58a6ff;
   text-transform: uppercase;
-  font-weight: 600;
   letter-spacing: 0.5px;
   margin-bottom: 6px;
 }
 
 .cert-heading {
   font-size: 15px;
-  color: #f0f6fc;
   font-weight: 600;
-  line-height: 1.35;
+  color: #f0f6fc;
   margin: 0 0 12px 0;
+  line-height: 1.35;
 }
 
 .cert-foot {
-  margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid #21262d;
   font-size: 12px;
   color: #8b949e;
-  border-top: 1px solid #21262d;
-  padding-top: 10px;
 }
 
 .cert-inst {
@@ -724,9 +843,9 @@ onUnmounted(() => {
   font-size: 11px;
 }
 
-/* =========================================
-   LIGHTBOX FULLSCREEN COM PAN & ZOOM DINÂMICO
-   ========================================= */
+/* ==========================================
+   ESTILOS DO MODAL LIGHTBOX COM PAN & ZOOM
+   ========================================== */
 .lightbox-backdrop {
   position: fixed;
   inset: 0;
@@ -747,9 +866,9 @@ onUnmounted(() => {
   width: 100%;
   max-width: 1250px;
   margin: 0 auto;
+  gap: 12px;
   z-index: 20;
   flex-wrap: wrap;
-  gap: 12px;
 }
 
 .topbar-left {
@@ -759,241 +878,244 @@ onUnmounted(() => {
 }
 
 .counter-badge {
+  background: #161b22;
+  border: 1px solid #30363d;
   color: #c9d1d9;
   font-size: 13px;
   font-weight: 600;
-  background: #161b22;
-  border: 1px solid #30363d;
   padding: 6px 14px;
   border-radius: 20px;
 }
 
 .zoom-status-pill {
-  color: #58a6ff;
-  font-size: 12px;
-  font-family: monospace;
-  font-weight: 600;
   background: rgba(88, 166, 255, 0.12);
   border: 1px solid rgba(88, 166, 255, 0.3);
+  color: #58a6ff;
+  font-size: 12px;
+  font-weight: 600;
   padding: 5px 12px;
   border-radius: 14px;
+  font-family: monospace;
 }
 
-/* Toolbar de Zoom */
 .zoom-toolbar {
   display: flex;
   align-items: center;
-  gap: 6px;
   background: #161b22;
   border: 1px solid #30363d;
-  padding: 4px 8px;
   border-radius: 20px;
+  padding: 4px 8px;
+  gap: 6px;
 }
 
 .tool-btn {
   background: #21262d;
   border: none;
   color: #f0f6fc;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
   cursor: pointer;
   transition: all 0.2s ease;
+  font-size: 15px;
 }
 
 .tool-btn:hover:not(:disabled) {
-  background: #58a6ff;
-  color: #0d1117;
+  background: #388bfd;
+  color: #ffffff;
 }
 
 .tool-btn:disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: not-allowed;
 }
 
 .reset-btn {
   width: auto;
-  padding: 0 10px;
-  border-radius: 12px;
-  gap: 4px;
-}
-
-.tool-label {
+  border-radius: 14px;
+  padding: 0 12px;
   font-size: 12px;
   font-weight: 600;
 }
 
-.lightbox-close-btn {
+.close-btn {
   background: #21262d;
-  color: #f0f6fc;
   border: 1px solid #30363d;
-  border-radius: 20px;
-  padding: 8px 18px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  display: inline-flex;
+  color: #f0f6fc;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
   transition: all 0.2s ease;
 }
 
-.lightbox-close-btn:hover {
+.close-btn:hover {
   background: #da3633;
-  border-color: #f85149;
-  color: #fff;
+  border-color: #da3633;
+  color: #ffffff;
+  transform: rotate(90deg);
 }
 
-/* Palco Central */
-.lightbox-stage {
+/* PALCO DE PAN E ZOOM */
+.lightbox-viewport {
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
   position: relative;
-  overflow: hidden;
-}
-
-.zoom-canvas {
-  width: 100%;
-  height: 65vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  cursor: default;
 }
 
-.zoomable-image {
+.lightbox-viewport.is-zoomed {
+  cursor: grab;
+}
+
+.lightbox-viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.image-transform-wrapper {
+  max-width: 95%;
+  max-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.lightbox-image {
   max-width: 100%;
-  max-height: 65vh;
+  max-height: 75vh;
   object-fit: contain;
   border-radius: 8px;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8);
-  border: 1px solid #30363d;
-  transition: transform 0.08s ease-out;
-  transform-origin: center center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
 }
 
-.interactive-hint {
-  margin-top: 10px;
-  font-size: 12px;
-  color: #8b949e;
-  background: rgba(22, 27, 34, 0.7);
-  padding: 4px 14px;
-  border-radius: 12px;
-  border: 1px solid #21262d;
-}
-
-.interactive-hint i {
-  color: #58a6ff;
-  margin-right: 4px;
-}
-
-.lightbox-caption {
-  text-align: center;
-  margin-top: 8px;
-}
-
-.lightbox-caption h4 {
-  color: #ffffff;
-  font-size: 18px;
-  margin: 0 0 4px 0;
-  font-weight: 600;
-}
-
-.lightbox-caption p {
-  color: #8b949e;
-  font-size: 13px;
-  margin: 0;
-}
-
-/* Setas Laterais de Navegação */
-.nav-arrow-btn {
+/* SETAS LATERAIS DO LIGHTBOX */
+.nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   background: rgba(22, 27, 34, 0.85);
   border: 1px solid #30363d;
   color: #f0f6fc;
-  width: 52px;
-  height: 52px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-size: 24px;
   cursor: pointer;
+  backdrop-filter: blur(8px);
   transition: all 0.2s ease;
+  z-index: 15;
+}
+
+.nav-btn:hover {
+  background: #388bfd;
+  border-color: #388bfd;
+  color: #ffffff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn { left: 16px; }
+.next-btn { right: 16px; }
+
+/* RODAPÉ DO LIGHTBOX */
+.lightbox-footer {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid #21262d;
+  padding-top: 14px;
+  flex-wrap: wrap;
+  gap: 12px;
   z-index: 20;
 }
 
-.nav-arrow-btn:hover {
-  background: #58a6ff;
-  border-color: #58a6ff;
-  color: #0d1117;
-  transform: translateY(-50%) scale(1.08);
+.footer-category {
+  font-size: 12px;
+  font-weight: 600;
+  color: #3ecf8e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.prev-arrow { left: 24px; }
-.next-arrow { right: 24px; }
-
-/* Controles Mobile */
-.lightbox-mobile-footer {
-  display: none;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  padding-top: 8px;
+.footer-title {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 4px 0;
 }
 
-.m-btn {
-  background: #21262d;
-  border: 1px solid #30363d;
-  color: #f0f6fc;
-  padding: 8px 14px;
-  border-radius: 8px;
+.footer-issuer {
+  color: #8b949e;
   font-size: 13px;
+  margin: 0;
+}
+
+.footer-hint {
   display: flex;
   align-items: center;
-  gap: 6px;
-  cursor: pointer;
+  gap: 8px;
+  font-size: 12px;
+  color: #8b949e;
 }
 
-.m-zoom-actions {
-  display: flex;
-  gap: 6px;
+.footer-hint .sep {
+  opacity: 0.4;
 }
 
-.zoom-m-btn {
-  padding: 8px 10px;
-  font-size: 15px;
-}
-
-.fade-enter-active, .fade-leave-active {
+/* TRANSIÇÃO DO MODAL */
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.25s ease;
 }
-.fade-enter-from, .fade-leave-to {
+
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
-/* Responsividade Mobile */
 @media (max-width: 768px) {
-  .nav-arrow-btn { display: none; }
-  .lightbox-mobile-footer { display: flex; }
-  .btn-text { display: none; }
-  .lightbox-close-btn { padding: 8px; border-radius: 50%; width: 36px; height: 36px; justify-content: center; }
-  .zoomable-image { max-height: 52vh; }
-  .zoom-canvas { height: 52vh; }
-  .zoom-toolbar { display: none; }
+  .cert-card-marquee {
+    width: 250px;
+  }
+  .cert-thumb-box {
+    height: 150px;
+  }
+  .lightbox-topbar {
+    justify-content: center;
+  }
+  .lightbox-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-hint {
+    display: none;
+  }
+  .nav-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 20px;
+  }
+  .prev-btn { left: 6px; }
+  .next-btn { right: 6px; }
 }
 </style>
